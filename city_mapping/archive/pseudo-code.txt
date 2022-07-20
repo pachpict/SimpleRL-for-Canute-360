@@ -1,0 +1,98 @@
+Corn Street, Bristol: 51.45484,-2.59309
+
+curl -g "https://overpass-api.de/api/interpreter?data=[out:json];node['amenity']['name'](around:500,51.45484,-2.59309);out;"
+
+ --------
+
+The London Stone:  51.5114760,-0.0895280
+
+Charing Cross: 51.50731,-0.12478
+
+curl -g "https://overpass-api.de/api/interpreter?data=[out:json];node['railway'='station']['name'](around:5000,51.50731,-0.12478);out;"
+
+curl -g "https://overpass-api.de/api/interpreter?data=[out:json];node['place'='town']['name'](around:5000,51.50731,-0.12478);out;"
+
+
+ --------
+
+Finding all pubs and bars within 200 yards of a train station in centre of London:
+
+curl -g "https://overpass-api.de/api/interpreter?data=[out:json];node['railway'='station']['name'](around:800,51.50731,-0.12478);out;" > ./crawl.txt; sleep 5; curl -g "https://overpass-api.de/api/interpreter?data=[out:json];node['railway'='station']['name'](around:1000,51.50731,-0.12478);node['amenity'='pub']['name'](around:180);out;"  >> ./crawl.txt; sleep 5; curl -g "https://overpass-api.de/api/interpreter?data=[out:json];node['railway'='station']['name'](around:1000,51.50731,-0.12478);node['amenity'='bar']['name'](around:180);out;" >> ./crawl.txt; grep '"name"' crawl.txt | less;
+
+curl -g "https://overpass-api.de/api/interpreter?data=[out:json];node['amenity']['name'~'Arms'](around:800,51.50731,-0.12478);out;"
+
+51.50731,-0.12478
+
+ --------
+
+And Brum:
+
+curl -g "https://overpass-api.de/api/interpreter?data=[out:json];node['railway'='station']['name'](around:800,52.4776,-1.8987);out;" > ./crawl.txt; sleep 5; curl -g "https://overpass-api.de/api/interpreter?data=[out:json];node['railway'='station']['name'](around:800,52.4776,-1.8987);node['amenity'='pub']['name'](around:180);out;"  >> ./crawl.txt; sleep 5; curl -g "https://overpass-api.de/api/interpreter?data=[out:json];node['railway'='station']['name'](around:800,52.4776,-1.8987);node['amenity'='bar']['name'](around:180);out;" >> ./crawl.txt; grep '"name"' crawl.txt | less;
+
+ --------
+
+And Bristol:
+
+curl -g "https://overpass-api.de/api/interpreter?data=[out:json];node['railway'='station']['name'](around:800,51.4491,-2.5804);out;" > ./crawl.txt; sleep 5; curl -g "https://overpass-api.de/api/interpreter?data=[out:json];node['railway'='station']['name'](around:800,51.4491,-2.5804);node['amenity'='pub']['name'](around:800);out;"  >> ./crawl.txt; sleep 5; curl -g "https://overpass-api.de/api/interpreter?data=[out:json];node['railway'='station']['name'](around:800,51.4491,-2.5804);node['amenity'='bar']['name'](around:800);out;" >> ./crawl.txt; grep '"name"' crawl.txt | less;
+
+curl -g "https://overpass-api.de/api/interpreter?data=[out:json];node['amenity'='pub']['name'](around:8000,51.45068,-2.58183);out;"
+
+Doesn't work, doesn't pick up the Knights Templar, says the nearest bars are in BS16 or something stupid.
+
+ --------
+
+Need to pay for this feature these days:
+
+curl "https://maps.googleapis.com/maps/api/directions/json?origin=Glasgow&destination=London&key=AIzaSyCAFj6VKVAkN8iFcyrfwmnpsZfFWQ9S-xI" > place.json; placelat=$( jq ".routes[0].legs[0].start_location.lat" place.json | sed -e 's/"//g' ); placelon=$( jq ".routes[0].legs[0].start_location.lng" place.json | sed -e 's/"//g' ); curl -g "https://overpass-api.de/api/interpreter?data=[out:json];node['place'='city']['name'](around:240000,$placelat,$placelon-2.5804);out;" > ./crawl.txt; grep '"name"' crawl.txt | less;
+
+ --------
+
+Buildings around BBT, including nodes within ways: 51.44294,-2.59301
+
+curl -g "https://overpass-api.de/api/interpreter?data=[out:json];way['name']['building'](around:75,51.44294,-2.59301);>;out;"
+
+ --------
+
+Append 'station' or 'st.' to the station names.
+
+Now arrange them all by lat and long to seven decimal places in matrix.
+
+(Note, all the below you may want to switch between lat/long, depending on which dimensional accuracy is more important, as this method favours one or the other, think about it...)
+
+Now find the difference between the greatest and least for lat and divide by eight.
+
+Zero at the top left.
+
+Create an eight row array and put each node into the closest row by rounding its lat.
+
+Calculate total 'overflowing rows', assuming only eight nodes are allowed in each row. Anything over 8 per row = +1 overflow, no matter if its got one too many or 100.
+
+Delete one blank row from between each two occupied rows, starting from the top, until you have matched the overflow total.
+
+If this has not deleted enough then run again, and again, until...
+
+If cannot delete enough blank rows then merge rows: Starting from the top, merge any two rows that have a total of less than 8. Do not merge one row twice per cycle. 
+
+If at end of cycle still not got rid of enough rows then cycle again until no rows are merged.
+
+If still haven't deleted enough rows then ... Somehow move on to purging cols... Come back to that later.
+
+Assuming any of the above worked and you have deleted enough rows for the *first* round of overflow then we split the overflowing rows. Starting from the top move all but the 8 nodes with the highest lat into another row inserted below.
+
+After this, recount overflowing rows again. If any overflow again then repeat the above. And so on, and so on.
+
+Now to deal with cols. 
+
+Assuming you have dealt with all overflowing rows then:
+
+Do do a loop perpendicular to all the above, except you are cycling *within* each row, so only comparing with others nodes in the same row, but still looking across all cols to delete empty ones.
+
+Now at this stage, if not all nodes are snug in 8x8 grid, you have to give up on some data. This whole process prioritises lat over long, because it doesn't delete any occupied rows. Also, nodes run down and to the right (but do not necessarily reach the bottom row or the rightmost col).
+
+Once all empty cols have been deleted, you keep splitting the overflowing cols, without regard to sticking within 8 cols, then merging them down if they can be, then splitting, and so on, until you have as many cols has you need.
+
+Now you condense col 8+ down to col 8, contatinating the node name with a semi-colon divider, to indicate that all these nodes are off the right edge of the frame.
+
+
+
+

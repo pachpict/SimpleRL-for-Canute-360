@@ -1,0 +1,149 @@
+{
+  "version": 0.6,
+  "generator": "Overpass API 0.7.55.5 2ca3f387",
+  "osm3s": {
+    "timestamp_osm_base": "2019-02-21T12:54:02Z",
+    "copyright": "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL."
+  },
+  "elements": [
+
+{
+  "type": "way",
+  "id": 4427494,
+  "nodes": [
+    27153624,
+    27153623,
+    27153681,
+    27153684,
+    5492349784,
+    5492349785,
+    27153622,
+    5492349786,
+    5492349787,
+    27153687,
+    27153621
+  ],
+  "tags": {
+    "highway": "unclassified",
+    "name": "Willway Street",
+    "postal_code": "BS3"
+  }
+},
+{
+  "type": "way",
+  "id": 4430167,
+  "nodes": [
+    27046094,
+    27046095,
+    2283531227,
+    5494985149,
+    27046096,
+    27046097,
+    21037661
+  ],
+  "tags": {
+    "highway": "unclassified",
+    "maxspeed": "20 mph",
+    "name": "Philip Street",
+    "postal_code": "BS3",
+    "sidewalk": "both"
+  }
+},
+{
+  "type": "way",
+  "id": 4436656,
+  "nodes": [
+    27153621,
+    6064361546,
+    2383579531,
+    1234761972,
+    6064362599,
+    27153720,
+    4638497935,
+    27153619
+  ],
+  "tags": {
+    "highway": "unclassified",
+    "maxspeed": "20 mph",
+    "name": "Stillhouse Lane",
+    "not:name": "Still House Lane",
+    "postal_code": "BS3",
+    "sidewalk": "right",
+    "surface": "cobblestone"
+  }
+},
+{
+  "type": "way",
+  "id": 4436664,
+  "nodes": [
+    27046097,
+    1395879925,
+    27153703,
+    1395879923,
+    27153692
+  ],
+  "tags": {
+    "highway": "unclassified",
+    "name": "Bartley Street",
+    "postal_code": "BS3"
+  }
+},
+{
+  "type": "way",
+  "id": 4436665,
+  "nodes": [
+    27046096,
+    5494984896,
+    27153713,
+    27153703
+  ],
+  "tags": {
+    "highway": "unclassified",
+    "maxspeed": "20 mph",
+    "name": "Clarke Street",
+    "sidewalk": "both"
+  }
+},
+{
+  "type": "way",
+  "id": 107437561,
+  "nodes": [
+    21037661,
+    2381828339,
+    2395643802,
+    21037662
+  ],
+  "tags": {
+    "bicycle": "yes",
+    "cycleway:left": "share_busway",
+    "foot": "yes",
+    "highway": "trunk",
+    "horse": "yes",
+    "lanes:psv:forward": "1",
+    "maxspeed": "20 mph",
+    "name": "Bedminster Parade",
+    "ref": "A38",
+    "source:name": "OS_OpenData_Locator"
+  }
+},
+{
+  "type": "way",
+  "id": 571834468,
+  "nodes": [
+    5494985149,
+    6064361548,
+    27153621
+  ],
+  "tags": {
+    "highway": "unclassified",
+    "maxspeed": "20 mph",
+    "name": "Stillhouse Lane",
+    "not:name": "Still House Lane",
+    "postal_code": "BS3",
+    "sidewalk": "both",
+    "surface": "cobblestone"
+  }
+}
+
+  ]
+}

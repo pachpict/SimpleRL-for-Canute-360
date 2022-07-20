@@ -1,0 +1,898 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<osm version="0.6" generator="Overpass API 0.7.55.5 2ca3f387">
+<note>The data included in this document is from www.openstreetmap.org. The data is made available under ODbL.</note>
+<meta osm_base="2019-02-20T18:47:02Z"/>
+
+  <bounds minlat="51.4425100" minlon="-2.5944200" maxlat="51.4435500" maxlon="-2.5919200"/>
+
+  <node id="21037661" lat="51.4433936" lon="-2.5944379" version="6" timestamp="2017-08-11T20:18:03Z" changeset="51044021" uid="14846" user="ndm"/>
+  <node id="27046094" lat="51.4419816" lon="-2.5911200" version="2" timestamp="2017-07-19T19:29:40Z" changeset="50414873" uid="115894" user="DaveF"/>
+  <node id="27046095" lat="51.4420577" lon="-2.5912428" version="3" timestamp="2018-11-15T18:41:48Z" changeset="64540249" uid="14846" user="ndm"/>
+  <node id="27046096" lat="51.4430098" lon="-2.5934821" version="4" timestamp="2018-11-15T18:41:48Z" changeset="64540249" uid="14846" user="ndm"/>
+  <node id="27046097" lat="51.4432358" lon="-2.5940688" version="3" timestamp="2013-04-27T21:20:07Z" changeset="15888875" uid="14846" user="ndm"/>
+  <node id="27153619" lat="51.4445507" lon="-2.5917723" version="3" timestamp="2017-01-27T20:55:53Z" changeset="45574406" uid="14846" user="ndm"/>
+  <node id="27153621" lat="51.4433217" lon="-2.5931382" version="2" timestamp="2011-09-04T11:37:07Z" changeset="9207418" uid="502095" user="Simbirkbeck"/>
+  <node id="27153622" lat="51.4427758" lon="-2.5915618" version="3" timestamp="2018-03-21T00:17:19Z" changeset="57369635" uid="14846" user="ndm"/>
+  <node id="27153623" lat="51.4437328" lon="-2.5910015" version="2" timestamp="2011-08-28T20:22:56Z" changeset="9151594" uid="502095" user="Simbirkbeck"/>
+  <node id="27153624" lat="51.4441341" lon="-2.5908243" version="3" timestamp="2018-03-21T00:17:19Z" changeset="57369635" uid="14846" user="ndm"/>
+  <node id="27153681" lat="51.4432553" lon="-2.5912166" version="2" timestamp="2011-08-28T20:22:56Z" changeset="9151594" uid="502095" user="Simbirkbeck"/>
+  <node id="27153684" lat="51.4428520" lon="-2.5914041" version="3" timestamp="2018-03-21T00:17:19Z" changeset="57369635" uid="14846" user="ndm"/>
+  <node id="27153687" lat="51.4427833" lon="-2.5918336" version="2" timestamp="2011-09-04T11:37:07Z" changeset="9207418" uid="502095" user="Simbirkbeck"/>
+  <node id="27153692" lat="51.4423624" lon="-2.5952072" version="3" timestamp="2018-03-21T23:19:02Z" changeset="57403896" uid="14846" user="ndm"/>
+  <node id="27153703" lat="51.4427029" lon="-2.5944202" version="3" timestamp="2018-03-21T23:19:02Z" changeset="57403896" uid="14846" user="ndm"/>
+  <node id="27153713" lat="51.4425631" lon="-2.5940515" version="3" timestamp="2018-03-21T23:19:02Z" changeset="57403896" uid="14846" user="ndm"/>
+  <node id="27153720" lat="51.4443639" lon="-2.5919832" version="5" timestamp="2018-11-15T18:41:48Z" changeset="64540249" uid="14846" user="ndm"/>
+  <node id="369314169" lat="51.4421152" lon="-2.5941401" version="3" timestamp="2017-11-21T22:16:17Z" changeset="53987486" uid="14846" user="ndm"/>
+  <node id="369314173" lat="51.4419978" lon="-2.5912197" version="2" timestamp="2011-08-28T21:55:17Z" changeset="9152445" uid="502095" user="Simbirkbeck"/>
+  <node id="485403173" lat="51.4435487" lon="-2.5944106" version="5" timestamp="2013-01-31T21:08:23Z" changeset="14864281" uid="189782" user="Norfolkadam">
+    <tag k="highway" v="bus_stop"/>
+    <tag k="local_ref" v="B"/>
+    <tag k="name" v="Bedminster Parade"/>
+    <tag k="naptan:AtcoCode" v="0100BRA10068"/>
+    <tag k="naptan:Bearing" v="NE"/>
+    <tag k="naptan:CommonName" v="Bedminster Pde b"/>
+    <tag k="naptan:Crossing" v="Regent Road"/>
+    <tag k="naptan:Landmark" v="Asda"/>
+    <tag k="naptan:NaptanCode" v="bstgdja"/>
+    <tag k="naptan:PlusbusZoneRef" v="BRSTLTM"/>
+    <tag k="naptan:Street" v="Bedminster Parade"/>
+    <tag k="source" v="naptan_import"/>
+  </node>
+  <node id="1234761972" lat="51.4438951" lon="-2.5925093" version="3" timestamp="2017-01-27T20:55:54Z" changeset="45574406" uid="14846" user="ndm"/>
+  <node id="1395879920" lat="51.4421599" lon="-2.5956495" version="2" timestamp="2018-03-21T23:19:02Z" changeset="57403896" uid="14846" user="ndm"/>
+  <node id="1395879923" lat="51.4422791" lon="-2.5946209" version="2" timestamp="2018-03-21T23:19:02Z" changeset="57403896" uid="14846" user="ndm"/>
+  <node id="1395879925" lat="51.4427589" lon="-2.5945384" version="1" timestamp="2011-08-12T10:09:28Z" changeset="8994181" uid="61216" user="UniEagle"/>
+  <node id="1404064353" lat="51.4432520" lon="-2.5918578" version="3" timestamp="2018-11-15T18:41:48Z" changeset="64540249" uid="14846" user="ndm"/>
+  <node id="1404064355" lat="51.4433271" lon="-2.5913707" version="1" timestamp="2011-08-18T22:17:10Z" changeset="9061305" uid="502095" user="Simbirkbeck"/>
+  <node id="1404064356" lat="51.4432736" lon="-2.5914163" version="1" timestamp="2011-08-18T22:17:10Z" changeset="9061305" uid="502095" user="Simbirkbeck"/>
+  <node id="1404064357" lat="51.4436782" lon="-2.5913519" version="1" timestamp="2011-08-18T22:17:10Z" changeset="9061305" uid="502095" user="Simbirkbeck"/>
+  <node id="1404064371" lat="51.4431471" lon="-2.5919721" version="3" timestamp="2018-11-15T18:41:48Z" changeset="64540249" uid="14846" user="ndm"/>
+  <node id="1404064381" lat="51.4433578" lon="-2.5929998" version="3" timestamp="2018-11-15T18:41:48Z" changeset="64540249" uid="14846" user="ndm"/>
+  <node id="1404064392" lat="51.4436292" lon="-2.5914472" version="3" timestamp="2018-11-15T18:41:48Z" changeset="64540249" uid="14846" user="ndm"/>
+  <node id="1404064395" lat="51.4435996" lon="-2.5914244" version="1" timestamp="2011-08-18T22:17:12Z" changeset="9061305" uid="502095" user="Simbirkbeck"/>
+  <node id="1404064396" lat="51.4440480" lon="-2.5922491" version="3" timestamp="2018-11-15T18:41:48Z" changeset="64540249" uid="14846" user="ndm"/>
+  <node id="1404064398" lat="51.4436130" lon="-2.5911910" version="1" timestamp="2011-08-18T22:17:12Z" changeset="9061305" uid="502095" user="Simbirkbeck"/>
+  <node id="1404064402" lat="51.4432330" lon="-2.5913774" version="1" timestamp="2011-08-18T22:17:12Z" changeset="9061305" uid="502095" user="Simbirkbeck"/>
+  <node id="1404064411" lat="51.4432516" lon="-2.5927488" version="3" timestamp="2018-11-15T18:41:48Z" changeset="64540249" uid="14846" user="ndm"/>
+  <node id="1404064414" lat="51.4428903" lon="-2.5916215" version="1" timestamp="2011-08-18T22:17:13Z" changeset="9061305" uid="502095" user="Simbirkbeck"/>
+  <node id="1404064415" lat="51.4430229" lon="-2.5921190" version="1" timestamp="2011-08-18T22:17:13Z" changeset="9061305" uid="502095" user="Simbirkbeck"/>
+  <node id="1404064416" lat="51.4428741" lon="-2.5917301" version="1" timestamp="2011-08-18T22:17:13Z" changeset="9061305" uid="502095" user="Simbirkbeck"/>
+  <node id="1404064418" lat="51.4434049" lon="-2.5925819" version="3" timestamp="2018-11-15T18:41:48Z" changeset="64540249" uid="14846" user="ndm"/>
+  <node id="1404064424" lat="51.4436838" lon="-2.5913878" version="3" timestamp="2018-11-15T18:41:48Z" changeset="64540249" uid="14846" user="ndm"/>
+  <node id="1416675342" lat="51.4428684" lon="-2.5943678" version="2" timestamp="2018-03-21T23:19:03Z" changeset="57403896" uid="14846" user="ndm"/>
+  <node id="1416675347" lat="51.4425928" lon="-2.5936740" version="1" timestamp="2011-08-28T21:55:03Z" changeset="9152445" uid="502095" user="Simbirkbeck"/>
+  <node id="1416675355" lat="51.4430967" lon="-2.5937797" version="2" timestamp="2018-03-21T23:19:03Z" changeset="57403896" uid="14846" user="ndm"/>
+  <node id="1416675364" lat="51.4429244" lon="-2.5943113" version="2" timestamp="2018-03-21T23:19:03Z" changeset="57403896" uid="14846" user="ndm"/>
+  <node id="1416675365" lat="51.4425864" lon="-2.5926827" version="1" timestamp="2011-08-28T21:55:03Z" changeset="9152445" uid="502095" user="Simbirkbeck"/>
+  <node id="1416675368" lat="51.4429236" lon="-2.5941186" version="2" timestamp="2018-03-21T23:19:03Z" changeset="57403896" uid="14846" user="ndm"/>
+  <node id="1416675370" lat="51.4432176" lon="-2.5933279" version="2" timestamp="2018-11-15T18:41:48Z" changeset="64540249" uid="14846" user="ndm"/>
+  <node id="1416675393" lat="51.4428377" lon="-2.5943988" version="2" timestamp="2018-03-21T23:19:03Z" changeset="57403896" uid="14846" user="ndm"/>
+  <node id="1416675403" lat="51.4426164" lon="-2.5940192" version="2" timestamp="2014-02-16T15:53:48Z" changeset="20597781" uid="1258896" user="ioangogo"/>
+  <node id="1416675405" lat="51.4427034" lon="-2.5929590" version="1" timestamp="2011-08-28T21:55:04Z" changeset="9152445" uid="502095" user="Simbirkbeck"/>
+  <node id="1416675407" lat="51.4433322" lon="-2.5943785" version="2" timestamp="2014-06-20T21:25:56Z" changeset="23052671" uid="14846" user="ndm"/>
+  <node id="1416675412" lat="51.4429728" lon="-2.5942440" version="2" timestamp="2018-03-21T23:19:03Z" changeset="57403896" uid="14846" user="ndm"/>
+  <node id="1416675424" lat="51.4429752" lon="-2.5936614" version="2" timestamp="2018-03-21T23:19:03Z" changeset="57403896" uid="14846" user="ndm"/>
+  <node id="1416675425" lat="51.4429472" lon="-2.5939679" version="2" timestamp="2018-03-21T23:19:03Z" changeset="57403896" uid="14846" user="ndm"/>
+  <node id="1416675427" lat="51.4430383" lon="-2.5939865" version="2" timestamp="2018-03-21T23:19:03Z" changeset="57403896" uid="14846" user="ndm"/>
+  <node id="1416675428" lat="51.4430068" lon="-2.5935953" version="2" timestamp="2018-03-21T23:19:03Z" changeset="57403896" uid="14846" user="ndm"/>
+  <node id="1416675440" lat="51.4427963" lon="-2.5942477" version="2" timestamp="2018-03-21T23:19:03Z" changeset="57403896" uid="14846" user="ndm"/>
+  <node id="1416675449" lat="51.4428338" lon="-2.5942100" version="2" timestamp="2018-03-21T23:19:03Z" changeset="57403896" uid="14846" user="ndm"/>
+  <node id="1416675462" lat="51.4428884" lon="-2.5941541" version="2" timestamp="2018-03-21T23:19:03Z" changeset="57403896" uid="14846" user="ndm"/>
+  <node id="1416675479" lat="51.4429953" lon="-2.5940367" version="2" timestamp="2018-03-21T23:19:03Z" changeset="57403896" uid="14846" user="ndm"/>
+  <node id="1416675482" lat="51.4428814" lon="-2.5941364" version="2" timestamp="2018-03-21T23:19:03Z" changeset="57403896" uid="14846" user="ndm"/>
+  <node id="1416675484" lat="51.4427834" lon="-2.5944538" version="2" timestamp="2018-03-21T23:19:03Z" changeset="57403896" uid="14846" user="ndm"/>
+  <node id="1416675499" lat="51.4429658" lon="-2.5936381" version="2" timestamp="2018-03-21T23:19:03Z" changeset="57403896" uid="14846" user="ndm"/>
+  <node id="1416675500" lat="51.4425738" lon="-2.5918555" version="2" timestamp="2018-03-21T00:17:20Z" changeset="57369635" uid="14846" user="ndm"/>
+  <node id="1416675503" lat="51.4431411" lon="-2.5938997" version="2" timestamp="2018-03-21T23:19:03Z" changeset="57403896" uid="14846" user="ndm"/>
+  <node id="1416675512" lat="51.4430015" lon="-2.5942204" version="2" timestamp="2018-03-21T23:19:03Z" changeset="57403896" uid="14846" user="ndm"/>
+  <node id="1416675514" lat="51.4424571" lon="-2.5938215" version="1" timestamp="2011-08-28T21:55:07Z" changeset="9152445" uid="502095" user="Simbirkbeck"/>
+  <node id="1416675516" lat="51.4430632" lon="-2.5934755" version="2" timestamp="2018-03-21T23:19:03Z" changeset="57403896" uid="14846" user="ndm"/>
+  <node id="1416675526" lat="51.4426478" lon="-2.5925036" version="2" timestamp="2018-03-21T00:17:20Z" changeset="57369635" uid="14846" user="ndm"/>
+  <node id="1416675528" lat="51.4424217" lon="-2.5928785" version="1" timestamp="2011-08-28T21:55:07Z" changeset="9152445" uid="502095" user="Simbirkbeck"/>
+  <node id="1416675537" lat="51.4433012" lon="-2.5943084" version="2" timestamp="2014-06-20T21:25:56Z" changeset="23052671" uid="14846" user="ndm"/>
+  <node id="1416675544" lat="51.4431570" lon="-2.5940139" version="2" timestamp="2018-03-21T23:19:03Z" changeset="57403896" uid="14846" user="ndm"/>
+  <node id="1416675552" lat="51.4430915" lon="-2.5935459" version="2" timestamp="2018-03-21T23:19:03Z" changeset="57403896" uid="14846" user="ndm"/>
+  <node id="1416675564" lat="51.4425379" lon="-2.5931441" version="1" timestamp="2011-08-28T21:55:09Z" changeset="9152445" uid="502095" user="Simbirkbeck"/>
+  <node id="1416675565" lat="51.4431850" lon="-2.5944324" version="2" timestamp="2014-06-20T21:25:56Z" changeset="23052671" uid="14846" user="ndm"/>
+  <node id="1416675570" lat="51.4431010" lon="-2.5938060" version="2" timestamp="2018-03-21T23:19:03Z" changeset="57403896" uid="14846" user="ndm"/>
+  <node id="1416675571" lat="51.4430396" lon="-2.5938711" version="2" timestamp="2018-03-21T23:19:03Z" changeset="57403896" uid="14846" user="ndm"/>
+  <node id="1416675576" lat="51.4428644" lon="-2.5943574" version="2" timestamp="2018-03-21T23:19:03Z" changeset="57403896" uid="14846" user="ndm"/>
+  <node id="1416675577" lat="51.4424318" lon="-2.5920081" version="1" timestamp="2011-08-28T21:55:09Z" changeset="9152445" uid="502095" user="Simbirkbeck"/>
+  <node id="1416675578" lat="51.4428595" lon="-2.5937440" version="2" timestamp="2018-03-21T23:19:03Z" changeset="57403896" uid="14846" user="ndm"/>
+  <node id="1416675579" lat="51.4434863" lon="-2.5941816" version="2" timestamp="2018-03-21T00:17:20Z" changeset="57369635" uid="14846" user="ndm"/>
+  <node id="1416675581" lat="51.4429192" lon="-2.5942980" version="2" timestamp="2018-03-21T23:19:03Z" changeset="57403896" uid="14846" user="ndm"/>
+  <node id="1416675584" lat="51.4430083" lon="-2.5940675" version="2" timestamp="2018-03-21T23:19:03Z" changeset="57403896" uid="14846" user="ndm"/>
+  <node id="1416675586" lat="51.4434374" lon="-2.5940531" version="2" timestamp="2018-03-21T00:17:20Z" changeset="57369635" uid="14846" user="ndm"/>
+  <node id="1416675590" lat="51.4422749" lon="-2.5933901" version="1" timestamp="2011-08-28T21:55:10Z" changeset="9152445" uid="502095" user="Simbirkbeck"/>
+  <node id="1416675592" lat="51.4432085" lon="-2.5945455" version="3" timestamp="2015-10-29T00:33:46Z" changeset="34939597" uid="14846" user="ndm"/>
+  <node id="1416675597" lat="51.4432094" lon="-2.5944826" version="2" timestamp="2014-06-20T21:25:56Z" changeset="23052671" uid="14846" user="ndm"/>
+  <node id="1416675599" lat="51.4427839" lon="-2.5923571" version="2" timestamp="2018-03-21T00:17:20Z" changeset="57369635" uid="14846" user="ndm"/>
+  <node id="1416675601" lat="51.4428704" lon="-2.5937708" version="2" timestamp="2018-03-21T23:19:03Z" changeset="57403896" uid="14846" user="ndm"/>
+  <node id="1416675603" lat="51.4428266" lon="-2.5941917" version="2" timestamp="2018-03-21T23:19:03Z" changeset="57403896" uid="14846" user="ndm"/>
+  <node id="1416675605" lat="51.4429601" lon="-2.5941197" version="2" timestamp="2018-03-21T23:19:03Z" changeset="57403896" uid="14846" user="ndm"/>
+  <node id="1416675606" lat="51.4428464" lon="-2.5943755" version="2" timestamp="2018-03-21T23:19:03Z" changeset="57403896" uid="14846" user="ndm"/>
+  <node id="1416675607" lat="51.4429381" lon="-2.5939454" version="2" timestamp="2018-03-21T23:19:03Z" changeset="57403896" uid="14846" user="ndm"/>
+  <node id="1416675614" lat="51.4431589" lon="-2.5933767" version="2" timestamp="2018-03-21T23:19:03Z" changeset="57403896" uid="14846" user="ndm"/>
+  <node id="1416675618" lat="51.4433660" lon="-2.5931697" version="1" timestamp="2011-08-28T21:55:12Z" changeset="9152445" uid="502095" user="Simbirkbeck"/>
+  <node id="1416675620" lat="51.4431186" lon="-2.5939240" version="2" timestamp="2018-03-21T23:19:03Z" changeset="57403896" uid="14846" user="ndm"/>
+  <node id="1416675621" lat="51.4424106" lon="-2.5932426" version="1" timestamp="2011-08-28T21:55:12Z" changeset="9152445" uid="502095" user="Simbirkbeck"/>
+  <node id="1416675627" lat="51.4435051" lon="-2.5935538" version="2" timestamp="2018-11-15T18:41:48Z" changeset="64540249" uid="14846" user="ndm"/>
+  <node id="1416675631" lat="51.4431491" lon="-2.5940763" version="2" timestamp="2018-03-21T23:19:03Z" changeset="57403896" uid="14846" user="ndm"/>
+  <node id="1416675636" lat="51.4433831" lon="-2.5937229" version="1" timestamp="2011-08-28T21:55:13Z" changeset="9152445" uid="502095" user="Simbirkbeck"/>
+  <node id="1422923652" lat="51.4431329" lon="-2.5931872" version="3" timestamp="2018-03-21T23:19:03Z" changeset="57403896" uid="14846" user="ndm"/>
+  <node id="1422923658" lat="51.4428789" lon="-2.5921545" version="2" timestamp="2018-03-21T00:17:20Z" changeset="57369635" uid="14846" user="ndm"/>
+  <node id="1422923664" lat="51.4432667" lon="-2.5931114" version="2" timestamp="2018-03-21T00:17:20Z" changeset="57369635" uid="14846" user="ndm"/>
+  <node id="1422923689" lat="51.4431578" lon="-2.5932250" version="2" timestamp="2018-03-21T00:17:20Z" changeset="57369635" uid="14846" user="ndm"/>
+  <node id="1422923722" lat="51.4429214" lon="-2.5931621" version="3" timestamp="2018-03-21T23:19:03Z" changeset="57403896" uid="14846" user="ndm"/>
+  <node id="1422923728" lat="51.4429982" lon="-2.5933383" version="3" timestamp="2018-03-21T23:19:03Z" changeset="57403896" uid="14846" user="ndm"/>
+  <node id="1422923731" lat="51.4427699" lon="-2.5922682" version="2" timestamp="2018-03-21T00:17:20Z" changeset="57369635" uid="14846" user="ndm"/>
+  <node id="1422923732" lat="51.4430562" lon="-2.5930110" version="3" timestamp="2018-03-21T23:19:03Z" changeset="57403896" uid="14846" user="ndm"/>
+  <node id="1425667926" lat="51.4426023" lon="-2.5942929" version="2" timestamp="2018-03-21T23:19:03Z" changeset="57403896" uid="14846" user="ndm"/>
+  <node id="1425668059" lat="51.4425405" lon="-2.5941842" version="2" timestamp="2018-03-21T23:19:03Z" changeset="57403896" uid="14846" user="ndm"/>
+  <node id="1425668101" lat="51.4425259" lon="-2.5941302" version="2" timestamp="2018-03-21T23:19:03Z" changeset="57403896" uid="14846" user="ndm"/>
+  <node id="1425668235" lat="51.4425669" lon="-2.5942120" version="2" timestamp="2018-03-21T23:19:04Z" changeset="57403896" uid="14846" user="ndm"/>
+  <node id="1425668282" lat="51.4425852" lon="-2.5942361" version="2" timestamp="2018-03-21T23:19:04Z" changeset="57403896" uid="14846" user="ndm"/>
+  <node id="1500596437" lat="51.4431581" lon="-2.5934407" version="3" timestamp="2018-03-21T23:19:04Z" changeset="57403896" uid="14846" user="ndm"/>
+  <node id="1625143272" lat="51.4427632" lon="-2.5918722" version="2" timestamp="2018-03-21T00:17:21Z" changeset="57369635" uid="14846" user="ndm"/>
+  <node id="1625143276" lat="51.4433344" lon="-2.5930227" version="2" timestamp="2018-11-15T18:41:49Z" changeset="64540249" uid="14846" user="ndm"/>
+  <node id="1625143310" lat="51.4426111" lon="-2.5917575" version="2" timestamp="2018-03-21T00:17:21Z" changeset="57369635" uid="14846" user="ndm"/>
+  <node id="1625143313" lat="51.4433171" lon="-2.5930202" version="1" timestamp="2012-02-09T11:28:45Z" changeset="10632875" uid="502095" user="Simbirkbeck"/>
+  <node id="1625143316" lat="51.4427589" lon="-2.5922797" version="2" timestamp="2018-03-21T00:17:21Z" changeset="57369635" uid="14846" user="ndm"/>
+  <node id="1625143317" lat="51.4427165" lon="-2.5920149" version="2" timestamp="2018-03-21T00:17:21Z" changeset="57369635" uid="14846" user="ndm"/>
+  <node id="1625143320" lat="51.4427105" lon="-2.5921602" version="2" timestamp="2018-03-21T00:17:21Z" changeset="57369635" uid="14846" user="ndm"/>
+  <node id="1625143338" lat="51.4430019" lon="-2.5922290" version="1" timestamp="2012-02-09T11:28:45Z" changeset="10632875" uid="502095" user="Simbirkbeck"/>
+  <node id="1625143347" lat="51.4425631" lon="-2.5918145" version="2" timestamp="2018-03-21T00:17:21Z" changeset="57369635" uid="14846" user="ndm"/>
+  <node id="1625143350" lat="51.4428305" lon="-2.5920350" version="2" timestamp="2018-03-21T00:17:21Z" changeset="57369635" uid="14846" user="ndm"/>
+  <node id="1625143351" lat="51.4431696" lon="-2.5920254" version="3" timestamp="2018-11-15T18:41:49Z" changeset="64540249" uid="14846" user="ndm"/>
+  <node id="1625143358" lat="51.4431039" lon="-2.5924717" version="1" timestamp="2012-02-09T11:28:46Z" changeset="10632875" uid="502095" user="Simbirkbeck"/>
+  <node id="1625143364" lat="51.4431708" lon="-2.5926380" version="1" timestamp="2012-02-09T11:28:47Z" changeset="10632875" uid="502095" user="Simbirkbeck"/>
+  <node id="2283531225" lat="51.4424496" lon="-2.5927762" version="1" timestamp="2013-04-27T21:19:40Z" changeset="15888875" uid="14846" user="ndm"/>
+  <node id="2283531227" lat="51.4426262" lon="-2.5925779" version="2" timestamp="2018-11-15T18:41:49Z" changeset="64540249" uid="14846" user="ndm"/>
+  <node id="2381654289" lat="51.4434675" lon="-2.5938995" version="2" timestamp="2018-03-21T00:17:21Z" changeset="57369635" uid="14846" user="ndm"/>
+  <node id="2381654290" lat="51.4435031" lon="-2.5939780" version="2" timestamp="2018-03-21T00:17:21Z" changeset="57369635" uid="14846" user="ndm"/>
+  <node id="2381654291" lat="51.4435582" lon="-2.5940898" version="2" timestamp="2018-03-21T00:17:21Z" changeset="57369635" uid="14846" user="ndm"/>
+  <node id="2381654292" lat="51.4435797" lon="-2.5937549" version="1" timestamp="2013-07-11T19:56:49Z" changeset="16917719" uid="256285" user="zkw"/>
+  <node id="2381654293" lat="51.4436066" lon="-2.5935741" version="2" timestamp="2018-03-21T00:17:21Z" changeset="57369635" uid="14846" user="ndm"/>
+  <node id="2381654294" lat="51.4436203" lon="-2.5938569" version="1" timestamp="2013-07-11T19:56:49Z" changeset="16917719" uid="256285" user="zkw"/>
+  <node id="2381654295" lat="51.4436632" lon="-2.5939647" version="1" timestamp="2013-07-11T19:56:49Z" changeset="16917719" uid="256285" user="zkw"/>
+  <node id="2381654296" lat="51.4436782" lon="-2.5937367" version="2" timestamp="2018-03-21T00:17:22Z" changeset="57369635" uid="14846" user="ndm"/>
+  <node id="2381654297" lat="51.4436943" lon="-2.5934660" version="2" timestamp="2018-03-21T00:17:22Z" changeset="57369635" uid="14846" user="ndm"/>
+  <node id="2381654299" lat="51.4437600" lon="-2.5935885" version="3" timestamp="2018-11-15T18:41:49Z" changeset="64540249" uid="14846" user="ndm"/>
+  <node id="2383579529" lat="51.4432669" lon="-2.5933284" version="1" timestamp="2013-07-13T19:11:50Z" changeset="16940560" uid="256285" user="zkw">
+    <tag k="natural" v="tree"/>
+  </node>
+  <node id="2383579530" lat="51.4433359" lon="-2.5932466" version="2" timestamp="2018-11-15T18:41:49Z" changeset="64540249" uid="14846" user="ndm">
+    <tag k="natural" v="tree"/>
+  </node>
+  <node id="2383579531" lat="51.4435155" lon="-2.5929247" version="2" timestamp="2017-01-27T20:55:55Z" changeset="45574406" uid="14846" user="ndm"/>
+  <node id="2395643785" lat="51.4434973" lon="-2.5935638" version="2" timestamp="2018-03-21T00:17:22Z" changeset="57369635" uid="14846" user="ndm"/>
+  <node id="2395643788" lat="51.4436255" lon="-2.5938472" version="1" timestamp="2013-07-24T22:54:22Z" changeset="17082087" uid="256285" user="zkw"/>
+  <node id="2674943364" lat="51.4426733" lon="-2.5941740" version="2" timestamp="2018-03-21T23:19:04Z" changeset="57403896" uid="14846" user="ndm"/>
+  <node id="2674943365" lat="51.4427276" lon="-2.5941189" version="2" timestamp="2018-03-21T23:19:04Z" changeset="57403896" uid="14846" user="ndm"/>
+  <node id="2674943366" lat="51.4427463" lon="-2.5941664" version="2" timestamp="2018-03-21T23:19:04Z" changeset="57403896" uid="14846" user="ndm"/>
+  <node id="2674943367" lat="51.4428204" lon="-2.5941002" version="2" timestamp="2018-03-21T23:19:04Z" changeset="57403896" uid="14846" user="ndm"/>
+  <node id="2674943369" lat="51.4427305" lon="-2.5938786" version="2" timestamp="2018-03-21T23:19:04Z" changeset="57403896" uid="14846" user="ndm"/>
+  <node id="2925269579" lat="51.4430227" lon="-2.5945624" version="2" timestamp="2015-10-29T00:33:46Z" changeset="34939597" uid="14846" user="ndm"/>
+  <node id="2925269581" lat="51.4429923" lon="-2.5943930" version="2" timestamp="2015-10-29T00:33:46Z" changeset="34939597" uid="14846" user="ndm"/>
+  <node id="2925269582" lat="51.4430860" lon="-2.5946955" version="2" timestamp="2015-10-29T00:33:46Z" changeset="34939597" uid="14846" user="ndm"/>
+  <node id="2925269583" lat="51.4430297" lon="-2.5943471" version="2" timestamp="2015-10-29T00:33:46Z" changeset="34939597" uid="14846" user="ndm"/>
+  <node id="2925269584" lat="51.4431192" lon="-2.5946520" version="2" timestamp="2015-10-29T00:33:46Z" changeset="34939597" uid="14846" user="ndm"/>
+  <node id="2925269585" lat="51.4431517" lon="-2.5946085" version="2" timestamp="2015-10-29T00:33:46Z" changeset="34939597" uid="14846" user="ndm"/>
+  <node id="2925269586" lat="51.4430831" lon="-2.5942818" version="2" timestamp="2015-10-29T00:33:46Z" changeset="34939597" uid="14846" user="ndm"/>
+  <node id="2925269587" lat="51.4431905" lon="-2.5945076" version="2" timestamp="2015-10-29T00:33:46Z" changeset="34939597" uid="14846" user="ndm"/>
+  <node id="3807697771" lat="51.4429606" lon="-2.5944318" version="1" timestamp="2015-10-29T00:33:38Z" changeset="34939597" uid="14846" user="ndm"/>
+  <node id="4638497935" lat="51.4444122" lon="-2.5919368" version="1" timestamp="2017-01-27T20:55:53Z" changeset="45574406" uid="14846" user="ndm"/>
+  <node id="4786503551" lat="51.4428336" lon="-2.5935149" version="1" timestamp="2017-04-10T15:27:59Z" changeset="47627475" uid="5647038" user="deckador"/>
+  <node id="4786503552" lat="51.4428378" lon="-2.5934676" version="1" timestamp="2017-04-10T15:27:59Z" changeset="47627475" uid="5647038" user="deckador"/>
+  <node id="4786503553" lat="51.4428652" lon="-2.5934355" version="1" timestamp="2017-04-10T15:27:59Z" changeset="47627475" uid="5647038" user="deckador"/>
+  <node id="4786503554" lat="51.4427862" lon="-2.5932445" version="1" timestamp="2017-04-10T15:27:59Z" changeset="47627475" uid="5647038" user="deckador"/>
+  <node id="4786503555" lat="51.4427462" lon="-2.5932749" version="1" timestamp="2017-04-10T15:27:59Z" changeset="47627475" uid="5647038" user="deckador"/>
+  <node id="4786503556" lat="51.4427020" lon="-2.5933527" version="1" timestamp="2017-04-10T15:27:59Z" changeset="47627475" uid="5647038" user="deckador"/>
+  <node id="4786503557" lat="51.4426125" lon="-2.5934034" version="1" timestamp="2017-04-10T15:27:59Z" changeset="47627475" uid="5647038" user="deckador"/>
+  <node id="4786503558" lat="51.4426356" lon="-2.5934625" version="1" timestamp="2017-04-10T15:27:59Z" changeset="47627475" uid="5647038" user="deckador"/>
+  <node id="4786503559" lat="51.4426472" lon="-2.5935183" version="1" timestamp="2017-04-10T15:27:59Z" changeset="47627475" uid="5647038" user="deckador"/>
+  <node id="4786503560" lat="51.4427515" lon="-2.5936281" version="1" timestamp="2017-04-10T15:27:59Z" changeset="47627475" uid="5647038" user="deckador"/>
+  <node id="4786503561" lat="51.4426008" lon="-2.5933620" version="1" timestamp="2017-04-10T15:27:59Z" changeset="47627475" uid="5647038" user="deckador"/>
+  <node id="4786503562" lat="51.4425482" lon="-2.5932361" version="1" timestamp="2017-04-10T15:27:59Z" changeset="47627475" uid="5647038" user="deckador"/>
+  <node id="4786503563" lat="51.4425577" lon="-2.5931888" version="1" timestamp="2017-04-10T15:27:59Z" changeset="47627475" uid="5647038" user="deckador"/>
+  <node id="4786503564" lat="51.4425924" lon="-2.5931465" version="1" timestamp="2017-04-10T15:27:59Z" changeset="47627475" uid="5647038" user="deckador"/>
+  <node id="4786503565" lat="51.4426125" lon="-2.5931533" version="1" timestamp="2017-04-10T15:27:59Z" changeset="47627475" uid="5647038" user="deckador"/>
+  <node id="4786503566" lat="51.4426584" lon="-2.5931028" version="1" timestamp="2017-04-10T15:27:59Z" changeset="47627475" uid="5647038" user="deckador"/>
+  <node id="4786503567" lat="51.4427146" lon="-2.5932344" version="1" timestamp="2017-04-10T15:27:59Z" changeset="47627475" uid="5647038" user="deckador"/>
+  <node id="4786503568" lat="51.4427020" lon="-2.5932885" version="1" timestamp="2017-04-10T15:27:59Z" changeset="47627475" uid="5647038" user="deckador"/>
+  <node id="4786503569" lat="51.4426714" lon="-2.5933273" version="1" timestamp="2017-04-10T15:27:59Z" changeset="47627475" uid="5647038" user="deckador"/>
+  <node id="4786503570" lat="51.4426440" lon="-2.5933155" version="1" timestamp="2017-04-10T15:27:59Z" changeset="47627475" uid="5647038" user="deckador"/>
+  <node id="5241883995" lat="51.4420916" lon="-2.5938919" version="1" timestamp="2017-11-21T22:16:16Z" changeset="53987486" uid="14846" user="ndm"/>
+  <node id="5241883996" lat="51.4417038" lon="-2.5935942" version="1" timestamp="2017-11-21T22:16:16Z" changeset="53987486" uid="14846" user="ndm"/>
+  <node id="5241883997" lat="51.4417874" lon="-2.5932965" version="1" timestamp="2017-11-21T22:16:16Z" changeset="53987486" uid="14846" user="ndm"/>
+  <node id="5241883998" lat="51.4414346" lon="-2.5929022" version="1" timestamp="2017-11-21T22:16:16Z" changeset="53987486" uid="14846" user="ndm"/>
+  <node id="5241883999" lat="51.4429359" lon="-2.5934520" version="1" timestamp="2017-11-21T22:16:16Z" changeset="53987486" uid="14846" user="ndm"/>
+  <node id="5241884000" lat="51.4423508" lon="-2.5940877" version="1" timestamp="2017-11-21T22:16:16Z" changeset="53987486" uid="14846" user="ndm"/>
+  <node id="5492349766" lat="51.4434501" lon="-2.5930744" version="2" timestamp="2018-03-21T23:19:04Z" changeset="57403896" uid="14846" user="ndm"/>
+  <node id="5492349767" lat="51.4437958" lon="-2.5935295" version="2" timestamp="2018-11-15T18:41:49Z" changeset="64540249" uid="14846" user="ndm"/>
+  <node id="5492349768" lat="51.4437296" lon="-2.5934024" version="1" timestamp="2018-03-21T00:17:17Z" changeset="57369635" uid="14846" user="ndm"/>
+  <node id="5492349769" lat="51.4437170" lon="-2.5934178" version="1" timestamp="2018-03-21T00:17:17Z" changeset="57369635" uid="14846" user="ndm"/>
+  <node id="5492349770" lat="51.4435231" lon="-2.5929934" version="2" timestamp="2018-03-21T23:19:04Z" changeset="57403896" uid="14846" user="ndm"/>
+  <node id="5492349771" lat="51.4434103" lon="-2.5931169" version="2" timestamp="2018-03-21T23:19:04Z" changeset="57403896" uid="14846" user="ndm"/>
+  <node id="5492349772" lat="51.4436013" lon="-2.5937625" version="1" timestamp="2018-03-21T00:17:17Z" changeset="57369635" uid="14846" user="ndm"/>
+  <node id="5492349773" lat="51.4436054" lon="-2.5937571" version="1" timestamp="2018-03-21T00:17:17Z" changeset="57369635" uid="14846" user="ndm"/>
+  <node id="5492349774" lat="51.4436372" lon="-2.5938226" version="1" timestamp="2018-03-21T00:17:17Z" changeset="57369635" uid="14846" user="ndm"/>
+  <node id="5492349775" lat="51.4435515" lon="-2.5934514" version="1" timestamp="2018-03-21T00:17:17Z" changeset="57369635" uid="14846" user="ndm"/>
+  <node id="5492349776" lat="51.4434955" lon="-2.5935157" version="1" timestamp="2018-03-21T00:17:17Z" changeset="57369635" uid="14846" user="ndm"/>
+  <node id="5492349777" lat="51.4436815" lon="-2.5937276" version="1" timestamp="2018-03-21T00:17:17Z" changeset="57369635" uid="14846" user="ndm"/>
+  <node id="5492349778" lat="51.4430285" lon="-2.5929061" version="1" timestamp="2018-03-21T00:17:17Z" changeset="57369635" uid="14846" user="ndm"/>
+  <node id="5492349779" lat="51.4431374" lon="-2.5927924" version="1" timestamp="2018-03-21T00:17:17Z" changeset="57369635" uid="14846" user="ndm"/>
+  <node id="5492349780" lat="51.4429068" lon="-2.5926058" version="1" timestamp="2018-03-21T00:17:17Z" changeset="57369635" uid="14846" user="ndm"/>
+  <node id="5492349781" lat="51.4430157" lon="-2.5924922" version="1" timestamp="2018-03-21T00:17:17Z" changeset="57369635" uid="14846" user="ndm"/>
+  <node id="5492349782" lat="51.4427374" lon="-2.5918995" version="1" timestamp="2018-03-21T00:17:17Z" changeset="57369635" uid="14846" user="ndm"/>
+  <node id="5492349783" lat="51.4427652" lon="-2.5919670" version="1" timestamp="2018-03-21T00:17:17Z" changeset="57369635" uid="14846" user="ndm"/>
+  <node id="5492349784" lat="51.4428172" lon="-2.5914337" version="1" timestamp="2018-03-21T00:17:17Z" changeset="57369635" uid="14846" user="ndm"/>
+  <node id="5492349785" lat="51.4427896" lon="-2.5914913" version="1" timestamp="2018-03-21T00:17:17Z" changeset="57369635" uid="14846" user="ndm"/>
+  <node id="5492349786" lat="51.4427645" lon="-2.5916362" version="1" timestamp="2018-03-21T00:17:17Z" changeset="57369635" uid="14846" user="ndm"/>
+  <node id="5492349787" lat="51.4427595" lon="-2.5917421" version="1" timestamp="2018-03-21T00:17:17Z" changeset="57369635" uid="14846" user="ndm"/>
+  <node id="5494984896" lat="51.4425723" lon="-2.5939992" version="1" timestamp="2018-03-21T23:19:00Z" changeset="57403896" uid="14846" user="ndm"/>
+  <node id="5494984897" lat="51.4420374" lon="-2.5942804" version="1" timestamp="2018-03-21T23:19:00Z" changeset="57403896" uid="14846" user="ndm"/>
+  <node id="5494984898" lat="51.4420022" lon="-2.5943948" version="1" timestamp="2018-03-21T23:19:00Z" changeset="57403896" uid="14846" user="ndm"/>
+  <node id="5494984899" lat="51.4419922" lon="-2.5946644" version="1" timestamp="2018-03-21T23:19:00Z" changeset="57403896" uid="14846" user="ndm"/>
+  <node id="5494984900" lat="51.4425368" lon="-2.5940599" version="1" timestamp="2018-03-21T23:19:00Z" changeset="57403896" uid="14846" user="ndm">
+    <tag k="barrier" v="bollard"/>
+  </node>
+  <node id="5494984901" lat="51.4420189" lon="-2.5943238" version="1" timestamp="2018-03-21T23:19:00Z" changeset="57403896" uid="14846" user="ndm"/>
+  <node id="5494984916" lat="51.4424766" lon="-2.5941558" version="1" timestamp="2018-03-21T23:19:00Z" changeset="57403896" uid="14846" user="ndm"/>
+  <node id="5494984917" lat="51.4425081" lon="-2.5943324" version="1" timestamp="2018-03-21T23:19:00Z" changeset="57403896" uid="14846" user="ndm"/>
+  <node id="5494985132" lat="51.4422964" lon="-2.5954228" version="1" timestamp="2018-03-21T23:19:00Z" changeset="57403896" uid="14846" user="ndm"/>
+  <node id="5494985133" lat="51.4423424" lon="-2.5953993" version="1" timestamp="2018-03-21T23:19:00Z" changeset="57403896" uid="14846" user="ndm"/>
+  <node id="5494985134" lat="51.4423700" lon="-2.5953779" version="1" timestamp="2018-03-21T23:19:00Z" changeset="57403896" uid="14846" user="ndm"/>
+  <node id="5494985135" lat="51.4424068" lon="-2.5953028" version="1" timestamp="2018-03-21T23:19:00Z" changeset="57403896" uid="14846" user="ndm"/>
+  <node id="5494985136" lat="51.4424235" lon="-2.5952438" version="1" timestamp="2018-03-21T23:19:00Z" changeset="57403896" uid="14846" user="ndm"/>
+  <node id="5494985137" lat="51.4424143" lon="-2.5949889" version="1" timestamp="2018-03-21T23:19:00Z" changeset="57403896" uid="14846" user="ndm"/>
+  <node id="5494985138" lat="51.4428281" lon="-2.5947985" version="1" timestamp="2018-03-21T23:19:00Z" changeset="57403896" uid="14846" user="ndm"/>
+  <node id="5494985139" lat="51.4425464" lon="-2.5940904" version="1" timestamp="2018-03-21T23:19:00Z" changeset="57403896" uid="14846" user="ndm"/>
+  <node id="5494985140" lat="51.4420716" lon="-2.5943063" version="1" timestamp="2018-03-21T23:19:00Z" changeset="57403896" uid="14846" user="ndm"/>
+  <node id="5494985141" lat="51.4420181" lon="-2.5943935" version="1" timestamp="2018-03-21T23:19:00Z" changeset="57403896" uid="14846" user="ndm"/>
+  <node id="5494985142" lat="51.4420097" lon="-2.5946671" version="1" timestamp="2018-03-21T23:19:00Z" changeset="57403896" uid="14846" user="ndm"/>
+  <node id="5494985143" lat="51.4420440" lon="-2.5948481" version="1" timestamp="2018-03-21T23:19:00Z" changeset="57403896" uid="14846" user="ndm"/>
+  <node id="5494985144" lat="51.4421531" lon="-2.5954919" version="1" timestamp="2018-03-21T23:19:00Z" changeset="57403896" uid="14846" user="ndm"/>
+  <node id="5494985145" lat="51.4430287" lon="-2.5939617" version="1" timestamp="2018-03-21T23:19:00Z" changeset="57403896" uid="14846" user="ndm"/>
+  <node id="5494985146" lat="51.4430588" lon="-2.5939261" version="1" timestamp="2018-03-21T23:19:00Z" changeset="57403896" uid="14846" user="ndm"/>
+  <node id="5494985147" lat="51.4430288" lon="-2.5936121" version="1" timestamp="2018-03-21T23:19:00Z" changeset="57403896" uid="14846" user="ndm"/>
+  <node id="5494985148" lat="51.4430182" lon="-2.5936232" version="1" timestamp="2018-03-21T23:19:00Z" changeset="57403896" uid="14846" user="ndm"/>
+  <node id="5494985149" lat="51.4429971" lon="-2.5934518" version="2" timestamp="2018-11-15T18:41:49Z" changeset="64540249" uid="14846" user="ndm"/>
+  <node id="5494985150" lat="51.4431768" lon="-2.5934214" version="1" timestamp="2018-03-21T23:19:00Z" changeset="57403896" uid="14846" user="ndm"/>
+  <node id="5494985151" lat="51.4431684" lon="-2.5934664" version="1" timestamp="2018-03-21T23:19:00Z" changeset="57403896" uid="14846" user="ndm"/>
+  <node id="5494985152" lat="51.4435168" lon="-2.5932368" version="1" timestamp="2018-03-21T23:19:01Z" changeset="57403896" uid="14846" user="ndm"/>
+  <node id="5494985153" lat="51.4435922" lon="-2.5931447" version="1" timestamp="2018-03-21T23:19:01Z" changeset="57403896" uid="14846" user="ndm"/>
+  <node id="5494985154" lat="51.4434871" lon="-2.5931635" version="1" timestamp="2018-03-21T23:19:01Z" changeset="57403896" uid="14846" user="ndm"/>
+  <node id="5494985155" lat="51.4434472" lon="-2.5932061" version="1" timestamp="2018-03-21T23:19:01Z" changeset="57403896" uid="14846" user="ndm"/>
+  <node id="6028538255" lat="51.4433907" lon="-2.5942903" version="1" timestamp="2018-10-31T23:53:11Z" changeset="64062946" uid="14846" user="ndm"/>
+  <node id="6028538256" lat="51.4432195" lon="-2.5938780" version="1" timestamp="2018-10-31T23:53:11Z" changeset="64062946" uid="14846" user="ndm"/>
+  <node id="6028538257" lat="51.4433132" lon="-2.5937779" version="1" timestamp="2018-10-31T23:53:11Z" changeset="64062946" uid="14846" user="ndm"/>
+  <node id="6028538258" lat="51.4434844" lon="-2.5941901" version="1" timestamp="2018-10-31T23:53:11Z" changeset="64062946" uid="14846" user="ndm"/>
+  <node id="6064361546" lat="51.4433333" lon="-2.5931254" version="1" timestamp="2018-11-15T18:41:45Z" changeset="64540249" uid="14846" user="ndm"/>
+  <node id="6064361547" lat="51.4433549" lon="-2.5931816" version="1" timestamp="2018-11-15T18:41:45Z" changeset="64540249" uid="14846" user="ndm">
+    <tag k="barrier" v="gate"/>
+  </node>
+  <node id="6064361548" lat="51.4432705" lon="-2.5931886" version="1" timestamp="2018-11-15T18:41:45Z" changeset="64540249" uid="14846" user="ndm"/>
+  <node id="6064361549" lat="51.4432932" lon="-2.5932474" version="1" timestamp="2018-11-15T18:41:45Z" changeset="64540249" uid="14846" user="ndm">
+    <tag k="barrier" v="gate"/>
+  </node>
+  <node id="6064361550" lat="51.4437342" lon="-2.5933890" version="1" timestamp="2018-11-15T18:41:45Z" changeset="64540249" uid="14846" user="ndm"/>
+  <node id="6064361551" lat="51.4435887" lon="-2.5927158" version="1" timestamp="2018-11-15T18:41:45Z" changeset="64540249" uid="14846" user="ndm"/>
+  <node id="6064361552" lat="51.4435514" lon="-2.5927564" version="1" timestamp="2018-11-15T18:41:45Z" changeset="64540249" uid="14846" user="ndm"/>
+  <node id="6064361553" lat="51.4435983" lon="-2.5927385" version="1" timestamp="2018-11-15T18:41:45Z" changeset="64540249" uid="14846" user="ndm"/>
+  <node id="6064361554" lat="51.4435608" lon="-2.5927787" version="1" timestamp="2018-11-15T18:41:45Z" changeset="64540249" uid="14846" user="ndm"/>
+  <node id="6064362599" lat="51.4441042" lon="-2.5922746" version="1" timestamp="2018-11-15T18:41:46Z" changeset="64540249" uid="14846" user="ndm"/>
+  <way id="4427494" version="4" timestamp="2018-03-21T00:17:23Z" changeset="57369635" uid="14846" user="ndm">
+    <nd ref="27153624"/>
+    <nd ref="27153623"/>
+    <nd ref="27153681"/>
+    <nd ref="27153684"/>
+    <nd ref="5492349784"/>
+    <nd ref="5492349785"/>
+    <nd ref="27153622"/>
+    <nd ref="5492349786"/>
+    <nd ref="5492349787"/>
+    <nd ref="27153687"/>
+    <nd ref="27153621"/>
+    <tag k="highway" v="unclassified"/>
+    <tag k="name" v="Willway Street"/>
+    <tag k="postal_code" v="BS3"/>
+  </way>
+  <way id="4430167" version="5" timestamp="2018-11-15T18:41:49Z" changeset="64540249" uid="14846" user="ndm">
+    <nd ref="27046094"/>
+    <nd ref="27046095"/>
+    <nd ref="2283531227"/>
+    <nd ref="5494985149"/>
+    <nd ref="27046096"/>
+    <nd ref="27046097"/>
+    <nd ref="21037661"/>
+    <tag k="highway" v="unclassified"/>
+    <tag k="maxspeed" v="20 mph"/>
+    <tag k="name" v="Philip Street"/>
+    <tag k="postal_code" v="BS3"/>
+    <tag k="sidewalk" v="both"/>
+  </way>
+  <way id="4436656" version="7" timestamp="2018-11-15T18:41:49Z" changeset="64540249" uid="14846" user="ndm">
+    <nd ref="27153621"/>
+    <nd ref="6064361546"/>
+    <nd ref="2383579531"/>
+    <nd ref="1234761972"/>
+    <nd ref="6064362599"/>
+    <nd ref="27153720"/>
+    <nd ref="4638497935"/>
+    <nd ref="27153619"/>
+    <tag k="highway" v="unclassified"/>
+    <tag k="maxspeed" v="20 mph"/>
+    <tag k="name" v="Stillhouse Lane"/>
+    <tag k="not:name" v="Still House Lane"/>
+    <tag k="postal_code" v="BS3"/>
+    <tag k="sidewalk" v="right"/>
+    <tag k="surface" v="cobblestone"/>
+  </way>
+  <way id="4436664" version="5" timestamp="2018-03-21T23:19:04Z" changeset="57403896" uid="14846" user="ndm">
+    <nd ref="27046097"/>
+    <nd ref="1395879925"/>
+    <nd ref="27153703"/>
+    <nd ref="1395879923"/>
+    <nd ref="27153692"/>
+    <tag k="highway" v="unclassified"/>
+    <tag k="name" v="Bartley Street"/>
+    <tag k="postal_code" v="BS3"/>
+  </way>
+  <way id="4436665" version="3" timestamp="2018-03-21T23:19:04Z" changeset="57403896" uid="14846" user="ndm">
+    <nd ref="27046096"/>
+    <nd ref="5494984896"/>
+    <nd ref="27153713"/>
+    <nd ref="27153703"/>
+    <tag k="highway" v="unclassified"/>
+    <tag k="maxspeed" v="20 mph"/>
+    <tag k="name" v="Clarke Street"/>
+    <tag k="sidewalk" v="both"/>
+  </way>
+  <way id="126728856" version="4" timestamp="2018-11-15T18:41:50Z" changeset="64540249" uid="14846" user="ndm">
+    <nd ref="1404064424"/>
+    <nd ref="1404064396"/>
+    <nd ref="6064361553"/>
+    <nd ref="6064361551"/>
+    <nd ref="6064361552"/>
+    <nd ref="6064361554"/>
+    <nd ref="1404064381"/>
+    <nd ref="1404064411"/>
+    <nd ref="1404064418"/>
+    <nd ref="1625143351"/>
+    <nd ref="1404064371"/>
+    <nd ref="1404064353"/>
+    <nd ref="1404064392"/>
+    <nd ref="1404064424"/>
+    <tag k="addr:city" v="Bristol"/>
+    <tag k="addr:place" v="Bedminster"/>
+    <tag k="addr:postcode" v="BS3 4AZ"/>
+    <tag k="addr:street" v="Willway Street"/>
+    <tag k="building" v="yes"/>
+    <tag k="name" v="Park Furnishings"/>
+    <tag k="shop" v="furniture"/>
+  </way>
+  <way id="126728865" version="1" timestamp="2011-08-18T22:17:15Z" changeset="9061305" uid="502095" user="Simbirkbeck">
+    <nd ref="1404064355"/>
+    <nd ref="1404064398"/>
+    <nd ref="1404064357"/>
+    <nd ref="1404064395"/>
+    <nd ref="1404064392"/>
+    <nd ref="1404064353"/>
+    <nd ref="1404064371"/>
+    <nd ref="1404064415"/>
+    <nd ref="1404064416"/>
+    <nd ref="1404064414"/>
+    <nd ref="1404064402"/>
+    <nd ref="1404064356"/>
+    <nd ref="1404064355"/>
+    <tag k="amenity" v="parking"/>
+  </way>
+  <way id="128136909" version="1" timestamp="2011-08-28T21:55:13Z" changeset="9152445" uid="502095" user="Simbirkbeck">
+    <nd ref="1416675528"/>
+    <nd ref="1416675365"/>
+    <nd ref="1416675405"/>
+    <nd ref="1416675564"/>
+    <nd ref="1416675528"/>
+    <tag k="amenity" v="parking"/>
+    <tag k="capacity" v="25"/>
+    <tag k="name" v="Windmill Hill City Farm Car Park"/>
+  </way>
+  <way id="128136911" version="1" timestamp="2011-08-28T21:55:13Z" changeset="9152445" uid="502095" user="Simbirkbeck">
+    <nd ref="1416675368"/>
+    <nd ref="1416675412"/>
+    <nd ref="1416675581"/>
+    <nd ref="1416675364"/>
+    <nd ref="1416675342"/>
+    <nd ref="1416675576"/>
+    <nd ref="1416675606"/>
+    <nd ref="1416675440"/>
+    <nd ref="1416675449"/>
+    <nd ref="1416675603"/>
+    <nd ref="1416675482"/>
+    <nd ref="1416675462"/>
+    <nd ref="1416675368"/>
+    <tag k="building" v="yes"/>
+  </way>
+  <way id="128136913" version="3" timestamp="2016-10-29T21:15:15Z" changeset="43273292" uid="14846" user="ndm">
+    <nd ref="1416675407"/>
+    <nd ref="1416675592"/>
+    <nd ref="2925269587"/>
+    <nd ref="1416675597"/>
+    <nd ref="1416675565"/>
+    <nd ref="1416675537"/>
+    <nd ref="1416675407"/>
+    <tag k="addr:city" v="Bristol"/>
+    <tag k="addr:housenumber" v="1"/>
+    <tag k="addr:postcode" v="BS3 4HH"/>
+    <tag k="addr:street" v="East Street"/>
+    <tag k="addr:suburb" v="Bedminster"/>
+    <tag k="amenity" v="pub"/>
+    <tag k="building" v="yes"/>
+    <tag k="fhrs:id" v="312557"/>
+    <tag k="name" v="The Barley Mow"/>
+    <tag k="source:addr" v="FHRS Open Data"/>
+  </way>
+  <way id="128136914" version="2" timestamp="2018-03-21T23:19:04Z" changeset="57403896" uid="14846" user="ndm">
+    <nd ref="1416675570"/>
+    <nd ref="1416675503"/>
+    <nd ref="1416675620"/>
+    <nd ref="1416675544"/>
+    <nd ref="1416675631"/>
+    <nd ref="1416675512"/>
+    <nd ref="1416675605"/>
+    <nd ref="1416675584"/>
+    <nd ref="1416675479"/>
+    <nd ref="1416675427"/>
+    <nd ref="5494985145"/>
+    <nd ref="5494985146"/>
+    <nd ref="1416675571"/>
+    <nd ref="1416675570"/>
+    <tag k="building" v="yes"/>
+  </way>
+  <way id="128136915" version="2" timestamp="2014-03-17T12:17:32Z" changeset="21153839" uid="322785" user="BCNorwich">
+    <nd ref="1416675514"/>
+    <nd ref="1416675347"/>
+    <nd ref="1416675621"/>
+    <nd ref="1416675590"/>
+    <nd ref="1416675514"/>
+    <tag k="leisure" v="pitch"/>
+    <tag k="sport" v="hockey"/>
+  </way>
+  <way id="128136916" version="5" timestamp="2018-11-15T18:41:50Z" changeset="64540249" uid="14846" user="ndm">
+    <nd ref="1416675516"/>
+    <nd ref="1416675614"/>
+    <nd ref="5494985150"/>
+    <nd ref="1500596437"/>
+    <nd ref="5494985151"/>
+    <nd ref="1416675552"/>
+    <nd ref="1416675516"/>
+    <tag k="addr:city" v="Bristol"/>
+    <tag k="addr:housenumber" v="27"/>
+    <tag k="addr:postcode" v="BS3 4EA"/>
+    <tag k="addr:street" v="Philip Street"/>
+    <tag k="addr:suburb" v="Bedminster"/>
+    <tag k="building" v="yes"/>
+    <tag k="disused:amenity" v="pub"/>
+    <tag k="fhrs:id" v="312618"/>
+    <tag k="source:addr" v="FHRS Open Data"/>
+  </way>
+  <way id="128136922" version="4" timestamp="2019-01-20T13:47:06Z" changeset="66476066" uid="3937" user="southglos">
+    <nd ref="2674943364"/>
+    <nd ref="2674943365"/>
+    <nd ref="2674943366"/>
+    <nd ref="1416675393"/>
+    <nd ref="1416675484"/>
+    <nd ref="2674943364"/>
+    <tag k="addr:postcode" v="BS3 4DY"/>
+    <tag k="building" v="yes"/>
+    <tag k="name" v="21 CBS"/>
+  </way>
+  <way id="128136924" version="2" timestamp="2018-11-15T18:41:50Z" changeset="64540249" uid="14846" user="ndm">
+    <nd ref="1416675526"/>
+    <nd ref="1416675599"/>
+    <nd ref="1416675500"/>
+    <nd ref="1416675577"/>
+    <nd ref="1416675526"/>
+    <tag k="addr:city" v="Bristol"/>
+    <tag k="addr:housenumber" v="37"/>
+    <tag k="addr:postcode" v="BS3 4EA"/>
+    <tag k="addr:street" v="Philip Street"/>
+    <tag k="addr:suburb" v="Bedminster"/>
+    <tag k="building" v="yes"/>
+    <tag k="name" v="BV Studios"/>
+  </way>
+  <way id="128136926" version="3" timestamp="2018-11-15T18:41:50Z" changeset="64540249" uid="14846" user="ndm">
+    <nd ref="1416675636"/>
+    <nd ref="2395643785"/>
+    <nd ref="1416675627"/>
+    <nd ref="1416675618"/>
+    <nd ref="6064361547"/>
+    <nd ref="6064361549"/>
+    <nd ref="1416675370"/>
+    <nd ref="1416675636"/>
+    <tag k="amenity" v="parking"/>
+  </way>
+  <way id="128872443" version="3" timestamp="2018-07-21T19:32:15Z" changeset="60937869" uid="14846" user="ndm">
+    <nd ref="1422923658"/>
+    <nd ref="5492349781"/>
+    <nd ref="5492349780"/>
+    <nd ref="1422923731"/>
+    <nd ref="1422923658"/>
+    <tag k="addr:city" v="Bristol"/>
+    <tag k="addr:postcode" v="BS3 4BG"/>
+    <tag k="addr:street" v="Willway Street"/>
+    <tag k="addr:suburb" v="Bedminster"/>
+    <tag k="amenity" v="nightclub"/>
+    <tag k="building" v="yes"/>
+    <tag k="fhrs:id" v="386075"/>
+    <tag k="name" v="Fiddlers Club"/>
+    <tag k="source:addr" v="FHRS Open Data"/>
+  </way>
+  <way id="128872445" version="3" timestamp="2018-11-15T18:41:50Z" changeset="64540249" uid="14846" user="ndm">
+    <nd ref="1422923722"/>
+    <nd ref="1422923732"/>
+    <nd ref="1416675599"/>
+    <nd ref="1416675526"/>
+    <nd ref="1422923722"/>
+    <tag k="building" v="yes"/>
+    <tag k="name" v="Motorcade"/>
+  </way>
+  <way id="128872453" version="4" timestamp="2018-11-15T18:41:50Z" changeset="64540249" uid="14846" user="ndm">
+    <nd ref="1422923722"/>
+    <nd ref="1422923728"/>
+    <nd ref="1422923652"/>
+    <nd ref="1422923732"/>
+    <nd ref="1422923722"/>
+    <tag k="addr:city" v="Bristol"/>
+    <tag k="building" v="yes"/>
+    <tag k="irc" v="irc://irc.freenode.net#bristolhackspace"/>
+    <tag k="leisure" v="hackerspace"/>
+    <tag k="name" v="Bristol Hackspace"/>
+    <tag k="website" v="http://bristol.hackspace.org.uk"/>
+  </way>
+  <way id="149546423" version="1" timestamp="2012-02-09T11:28:49Z" changeset="10632875" uid="502095" user="Simbirkbeck">
+    <nd ref="1625143364"/>
+    <nd ref="1625143313"/>
+    <nd ref="1625143276"/>
+    <nd ref="1404064381"/>
+    <tag k="barrier" v="wall"/>
+  </way>
+  <way id="149546424" version="1" timestamp="2012-02-09T11:28:49Z" changeset="10632875" uid="502095" user="Simbirkbeck">
+    <nd ref="1625143358"/>
+    <nd ref="1625143338"/>
+    <nd ref="1625143351"/>
+    <tag k="barrier" v="wall"/>
+  </way>
+  <way id="149546430" version="2" timestamp="2018-03-21T00:17:25Z" changeset="57369635" uid="14846" user="ndm">
+    <nd ref="1625143317"/>
+    <nd ref="5492349783"/>
+    <nd ref="5492349782"/>
+    <nd ref="1625143272"/>
+    <nd ref="1625143350"/>
+    <nd ref="1625143320"/>
+    <nd ref="1625143347"/>
+    <nd ref="1625143310"/>
+    <nd ref="1625143317"/>
+    <tag k="building" v="yes"/>
+    <tag k="name" v="Doveton Press Printers"/>
+    <tag k="shop" v="copyshop"/>
+  </way>
+  <way id="149546432" version="3" timestamp="2019-01-20T13:47:10Z" changeset="66476066" uid="3937" user="southglos">
+    <nd ref="1625143316"/>
+    <nd ref="1422923731"/>
+    <nd ref="1422923658"/>
+    <nd ref="1625143350"/>
+    <nd ref="1625143320"/>
+    <nd ref="1625143316"/>
+    <tag k="addr:postcode" v="BS3 4BG"/>
+    <tag k="addr:street" v="Willway Street"/>
+    <tag k="building" v="yes"/>
+  </way>
+  <way id="219155195" version="1" timestamp="2013-04-27T21:19:41Z" changeset="15888875" uid="14846" user="ndm">
+    <nd ref="2283531225"/>
+    <nd ref="2283531227"/>
+    <tag k="highway" v="service"/>
+  </way>
+  <way id="229595292" version="3" timestamp="2017-11-07T00:23:55Z" changeset="53569357" uid="14846" user="ndm">
+    <nd ref="1416675579"/>
+    <nd ref="2381654291"/>
+    <nd ref="2381654290"/>
+    <nd ref="1416675586"/>
+    <nd ref="1416675579"/>
+    <tag k="addr:city" v="Bristol"/>
+    <tag k="addr:housenumber" v="92"/>
+    <tag k="addr:postcode" v="BS3 4HL"/>
+    <tag k="addr:street" v="Bedminster Parade"/>
+    <tag k="addr:suburb" v="Bedminster"/>
+    <tag k="amenity" v="fast_food"/>
+    <tag k="building" v="yes"/>
+    <tag k="cuisine" v="pizza"/>
+    <tag k="fhrs:id" v="545907"/>
+    <tag k="name" v="Domino's"/>
+    <tag k="website" v="http://www.dominos.co.uk/pizzaservice/bristol-bedminster.aspx"/>
+  </way>
+  <way id="229595296" version="3" timestamp="2019-01-22T14:21:11Z" changeset="66539372" uid="346039" user="fitzsimons">
+    <nd ref="2381654295"/>
+    <nd ref="2381654291"/>
+    <nd ref="2381654290"/>
+    <nd ref="2381654289"/>
+    <nd ref="2381654292"/>
+    <nd ref="2381654294"/>
+    <nd ref="2381654295"/>
+    <tag k="addr:city" v="Bristol"/>
+    <tag k="addr:housenumber" v="86"/>
+    <tag k="addr:postcode" v="BS3 4HL"/>
+    <tag k="addr:street" v="Bedminster Parade"/>
+    <tag k="building" v="yes"/>
+  </way>
+  <way id="231156085" version="2" timestamp="2018-03-21T00:17:25Z" changeset="57369635" uid="14846" user="ndm">
+    <nd ref="2395643788"/>
+    <nd ref="2395643785"/>
+    <tag k="highway" v="footway"/>
+  </way>
+  <way id="261879210" version="1" timestamp="2014-02-16T15:53:48Z" changeset="20597781" uid="1258896" user="ioangogo">
+    <nd ref="2674943367"/>
+    <nd ref="2674943369"/>
+    <nd ref="1416675403"/>
+    <nd ref="2674943364"/>
+    <nd ref="2674943365"/>
+    <nd ref="2674943366"/>
+    <nd ref="2674943367"/>
+    <tag k="access" v="private"/>
+    <tag k="amenity" v="parking"/>
+    <tag k="fee" v="no"/>
+    <tag k="park_ride" v="no"/>
+    <tag k="parking" v="surface"/>
+    <tag k="supervised" v="no"/>
+  </way>
+  <way id="288981072" version="2" timestamp="2016-08-06T23:05:34Z" changeset="41295365" uid="14846" user="ndm">
+    <nd ref="2925269585"/>
+    <nd ref="2925269583"/>
+    <nd ref="2925269581"/>
+    <nd ref="2925269584"/>
+    <nd ref="2925269585"/>
+    <tag k="building" v="yes"/>
+    <tag k="name" v="BS3 Carpets &amp; Flooring"/>
+    <tag k="shop" v="carpet"/>
+  </way>
+  <way id="288981090" version="3" timestamp="2017-06-21T23:44:45Z" changeset="49732824" uid="14846" user="ndm">
+    <nd ref="1416675592"/>
+    <nd ref="2925269587"/>
+    <nd ref="2925269586"/>
+    <nd ref="2925269583"/>
+    <nd ref="2925269585"/>
+    <nd ref="1416675592"/>
+    <tag k="addr:city" v="Bristol"/>
+    <tag k="addr:housenumber" v="1-3"/>
+    <tag k="addr:postcode" v="BS3 4HH"/>
+    <tag k="addr:street" v="East Street"/>
+    <tag k="addr:suburb" v="Bedminster"/>
+    <tag k="building" v="yes"/>
+    <tag k="name" v="William Hill"/>
+    <tag k="shop" v="bookmaker"/>
+  </way>
+  <way id="288981097" version="2" timestamp="2015-10-29T00:33:45Z" changeset="34939597" uid="14846" user="ndm">
+    <nd ref="2925269584"/>
+    <nd ref="2925269581"/>
+    <nd ref="3807697771"/>
+    <nd ref="2925269579"/>
+    <nd ref="2925269582"/>
+    <nd ref="2925269584"/>
+    <tag k="building" v="yes"/>
+    <tag k="name" v="nail century"/>
+    <tag k="shop" v="beauty"/>
+  </way>
+  <way id="466431838" version="6" timestamp="2018-03-21T23:19:05Z" changeset="57403896" uid="14846" user="ndm">
+    <nd ref="2674943367"/>
+    <nd ref="2674943369"/>
+    <nd ref="1416675578"/>
+    <nd ref="1416675601"/>
+    <nd ref="1416675424"/>
+    <nd ref="1416675499"/>
+    <nd ref="1416675428"/>
+    <nd ref="5494985148"/>
+    <nd ref="5494985147"/>
+    <nd ref="1416675355"/>
+    <nd ref="1416675607"/>
+    <nd ref="1416675425"/>
+    <nd ref="2674943367"/>
+    <tag k="addr:city" v="Bristol"/>
+    <tag k="addr:postcode" v="BS3 4EA"/>
+    <tag k="addr:street" v="Clarke Street"/>
+    <tag k="addr:suburb" v="Bedminster"/>
+    <tag k="amenity" v="place_of_worship"/>
+    <tag k="building" v="yes"/>
+    <tag k="denomination" v="baptist"/>
+    <tag k="name" v="Philip Street Chapel"/>
+    <tag k="religion" v="christian"/>
+    <tag k="website" v="https://www.philipstreet.org.uk/"/>
+  </way>
+  <way id="485889757" version="1" timestamp="2017-04-10T15:28:00Z" changeset="47627475" uid="5647038" user="deckador">
+    <nd ref="4786503551"/>
+    <nd ref="4786503552"/>
+    <nd ref="4786503553"/>
+    <nd ref="4786503554"/>
+    <nd ref="4786503555"/>
+    <nd ref="4786503556"/>
+    <nd ref="4786503557"/>
+    <nd ref="4786503558"/>
+    <nd ref="4786503559"/>
+    <nd ref="4786503560"/>
+    <nd ref="4786503551"/>
+    <tag k="leisure" v="playground"/>
+  </way>
+  <way id="485889758" version="1" timestamp="2017-04-10T15:28:00Z" changeset="47627475" uid="5647038" user="deckador">
+    <nd ref="4786503561"/>
+    <nd ref="4786503562"/>
+    <nd ref="4786503563"/>
+    <nd ref="4786503564"/>
+    <nd ref="4786503565"/>
+    <nd ref="4786503566"/>
+    <nd ref="4786503567"/>
+    <nd ref="4786503568"/>
+    <nd ref="4786503569"/>
+    <nd ref="4786503570"/>
+    <nd ref="4786503561"/>
+    <tag k="building" v="yes"/>
+  </way>
+  <way id="542163910" version="1" timestamp="2017-11-21T22:16:16Z" changeset="53987486" uid="14846" user="ndm">
+    <nd ref="369314169"/>
+    <nd ref="5241884000"/>
+    <nd ref="5241883999"/>
+    <nd ref="369314173"/>
+    <nd ref="5241883998"/>
+    <nd ref="5241883997"/>
+    <nd ref="5241883996"/>
+    <nd ref="5241883995"/>
+    <nd ref="369314169"/>
+    <tag k="addr:city" v="Bristol"/>
+    <tag k="addr:postcode" v="BS3 4EA"/>
+    <tag k="addr:street" v="Philip Street"/>
+    <tag k="addr:suburb" v="Bedminster"/>
+    <tag k="landuse" v="farmland"/>
+    <tag k="name" v="Windmill Hill City Farm"/>
+  </way>
+  <way id="571487017" version="2" timestamp="2018-03-21T23:19:05Z" changeset="57403896" uid="14846" user="ndm">
+    <nd ref="5494985153"/>
+    <nd ref="5492349769"/>
+    <nd ref="5492349768"/>
+    <nd ref="5492349767"/>
+    <nd ref="2381654299"/>
+    <nd ref="2381654297"/>
+    <nd ref="2381654293"/>
+    <nd ref="5492349775"/>
+    <nd ref="5494985155"/>
+    <nd ref="5494985154"/>
+    <nd ref="5494985152"/>
+    <nd ref="5494985153"/>
+    <tag k="building" v="yes"/>
+  </way>
+  <way id="571487018" version="1" timestamp="2018-03-21T00:17:18Z" changeset="57369635" uid="14846" user="ndm">
+    <nd ref="5492349776"/>
+    <nd ref="5492349775"/>
+    <nd ref="2381654293"/>
+    <nd ref="5492349777"/>
+    <nd ref="2381654296"/>
+    <nd ref="5492349774"/>
+    <nd ref="5492349773"/>
+    <nd ref="5492349772"/>
+    <nd ref="5492349776"/>
+    <tag k="building" v="yes"/>
+  </way>
+  <way id="571487019" version="1" timestamp="2018-03-21T00:17:18Z" changeset="57369635" uid="14846" user="ndm">
+    <nd ref="5492349779"/>
+    <nd ref="1422923664"/>
+    <nd ref="1422923689"/>
+    <nd ref="5492349778"/>
+    <nd ref="5492349779"/>
+    <tag k="building" v="yes"/>
+    <tag k="name" v="South Western Plastics Ltd"/>
+  </way>
+  <way id="571487020" version="1" timestamp="2018-03-21T00:17:18Z" changeset="57369635" uid="14846" user="ndm">
+    <nd ref="5492349781"/>
+    <nd ref="5492349779"/>
+    <nd ref="5492349778"/>
+    <nd ref="5492349780"/>
+    <nd ref="5492349781"/>
+    <tag k="building" v="yes"/>
+  </way>
+  <way id="571834450" version="1" timestamp="2018-03-21T23:19:01Z" changeset="57403896" uid="14846" user="ndm">
+    <nd ref="27153713"/>
+    <nd ref="5494984900"/>
+    <nd ref="5494984897"/>
+    <nd ref="5494984901"/>
+    <nd ref="5494984898"/>
+    <nd ref="5494984899"/>
+    <nd ref="1395879920"/>
+    <tag k="FIXME" v="check"/>
+    <tag k="highway" v="footway"/>
+  </way>
+  <way id="571834460" version="1" timestamp="2018-03-21T23:19:01Z" changeset="57403896" uid="14846" user="ndm">
+    <nd ref="5494984917"/>
+    <nd ref="5494984916"/>
+    <nd ref="1425668101"/>
+    <nd ref="1425668059"/>
+    <nd ref="1425668235"/>
+    <nd ref="1425668282"/>
+    <nd ref="1425667926"/>
+    <nd ref="5494984917"/>
+    <tag k="addr:unit" v="8"/>
+    <tag k="building" v="yes"/>
+  </way>
+  <way id="571834467" version="1" timestamp="2018-03-21T23:19:02Z" changeset="57403896" uid="14846" user="ndm">
+    <nd ref="5494985144"/>
+    <nd ref="5494985143"/>
+    <nd ref="5494985142"/>
+    <nd ref="5494985141"/>
+    <nd ref="5494985140"/>
+    <nd ref="5494985139"/>
+    <nd ref="5494985138"/>
+    <nd ref="5494985137"/>
+    <nd ref="5494985136"/>
+    <nd ref="5494985135"/>
+    <nd ref="5494985134"/>
+    <nd ref="5494985133"/>
+    <nd ref="5494985132"/>
+    <nd ref="5494985144"/>
+    <tag k="landuse" v="commercial"/>
+    <tag k="name" v="Windmill Farm Business Centre"/>
+  </way>
+  <way id="571834468" version="2" timestamp="2018-11-15T18:41:52Z" changeset="64540249" uid="14846" user="ndm">
+    <nd ref="5494985149"/>
+    <nd ref="6064361548"/>
+    <nd ref="27153621"/>
+    <tag k="highway" v="unclassified"/>
+    <tag k="maxspeed" v="20 mph"/>
+    <tag k="name" v="Stillhouse Lane"/>
+    <tag k="not:name" v="Still House Lane"/>
+    <tag k="postal_code" v="BS3"/>
+    <tag k="sidewalk" v="both"/>
+    <tag k="surface" v="cobblestone"/>
+  </way>
+  <way id="571834469" version="1" timestamp="2018-03-21T23:19:02Z" changeset="57403896" uid="14846" user="ndm">
+    <nd ref="5494985154"/>
+    <nd ref="5492349766"/>
+    <nd ref="5492349770"/>
+    <nd ref="5494985153"/>
+    <nd ref="5494985152"/>
+    <nd ref="5494985154"/>
+    <tag k="building" v="yes"/>
+    <tag k="name" v="Gardner Taxi Equipment"/>
+    <tag k="shop" v="tyres"/>
+  </way>
+  <way id="571834470" version="1" timestamp="2018-03-21T23:19:02Z" changeset="57403896" uid="14846" user="ndm">
+    <nd ref="5492349766"/>
+    <nd ref="5494985154"/>
+    <nd ref="5494985155"/>
+    <nd ref="5492349771"/>
+    <nd ref="5492349766"/>
+    <tag k="addr:housenumber" v="1"/>
+    <tag k="addr:street" v="Still House Lane"/>
+    <tag k="building" v="yes"/>
+  </way>
+  <way id="639845592" version="1" timestamp="2018-10-31T23:53:11Z" changeset="64062946" uid="14846" user="ndm">
+    <nd ref="6028538258"/>
+    <nd ref="6028538257"/>
+    <nd ref="6028538256"/>
+    <nd ref="6028538255"/>
+    <nd ref="6028538258"/>
+    <tag k="landuse" v="construction"/>
+  </way>
+  <way id="645013578" version="1" timestamp="2018-11-15T18:41:47Z" changeset="64540249" uid="14846" user="ndm">
+    <nd ref="6064361547"/>
+    <nd ref="6064361546"/>
+    <tag k="highway" v="service"/>
+  </way>
+  <way id="645013579" version="1" timestamp="2018-11-15T18:41:47Z" changeset="64540249" uid="14846" user="ndm">
+    <nd ref="6064361549"/>
+    <nd ref="6064361548"/>
+    <tag k="highway" v="service"/>
+  </way>
+  <way id="645013580" version="1" timestamp="2018-11-15T18:41:47Z" changeset="64540249" uid="14846" user="ndm">
+    <nd ref="6064361550"/>
+    <nd ref="2383579531"/>
+    <tag k="highway" v="service"/>
+  </way>
+
+</osm>
