@@ -61,8 +61,8 @@ function line {
 			let newcell=$mapcells
 		fi
 
-		sed -i "${newline}s/./${z}/${newcell}" map.brf
-		echo "${newline}","${newcell}","${highwayname}" >> highway-locations.csv
+		sed -i "${newline}s/./${z}/${newcell}" /dev/shm/map.brf
+		echo "${newline}","${newcell}","${highwayname}" >> /dev/shm/highway-locations.csv
 
 		(( x0 == x1 && y0 == y1 )) && return
 		(( e2 = err ))
@@ -81,14 +81,15 @@ function line {
 
 # Creating the blank map.
 # Two cell margin needed for cut-off.
-rm map.brf
+rm map.brf highway-locations.csv /dev/shm/highway-locations.csv /dev/shm/map.brf
 mapcells=806
 maplines=254
 filelines=0
 while [ ${filelines} -lt ${maplines} ]; do
-	printf "%-${mapcells}s\n" >> map.brf
+	printf "%-${mapcells}s\n" >> /dev/shm/map.brf
 	let filelines=filelines+1
 done
+touch /dev/shm/highway-locations.csv
 
 # Set map scale.
 # Have a Mercator projection problem here, different 
@@ -107,8 +108,9 @@ wb=-2.6039797
 # Download all the named highways for that region from Open Street Map.
 # Create wider catchment for nodes for those that go off edge of display.
 # Comment out whenever poss when testing due to OSM server limitations.
-curl -g "https://overpass-api.de/api/interpreter?data=[out:json];way['highway']['name']($sb,$wb,$nb,$eb);out;" > highways.json
-curl -g "https://overpass-api.de/api/interpreter?data=[out:json];node(around:400,$sb,$wb,$nb,$eb);way(bn)[highway];node(w)(around:400,$sb,$wb,$nb,$eb);out;" > nodes.json
+#curl -g "https://overpass-api.de/api/interpreter?data=[out:json];way['highway']['name']($sb,$wb,$nb,$eb);out%20geom;" > highways.json
+
+#curl -g "https://overpass-api.de/api/interpreter?data=[out:json];node(around:400,$sb,$wb,$nb,$eb);way(bn)[highway];node(w)(around:400,$sb,$wb,$nb,$eb);out;" > nodes.json
 
 # Loop through the highways
 rm highway-locations.csv
@@ -120,66 +122,57 @@ fi
 
 while [ $j -lt $numhighways ]; do
 
-	highwayname=$( jq ".elements[$j].tags.name" highways.json | sed 's/"//g')
-	highwaymark=$(echo ${highwayname:0:1} | tr '[:upper:]' '[:lower:]')
+	highway=$( jq ".elements[${j}]" highways.json)
 
-	echo "${j}/${numhighways}" ${highwayname} 
+	highwayname=$( echo ${highway} | jq ".tags.name" | sed 's/"//g')
+	highwaymark=$( echo ${highwayname:0:1} | tr '[:upper:]' '[:lower:]')
 
-	# Look for nodes referenced within each highway
-	nodeids=($( jq ".elements[$j].nodes[]" highways.json ))
-	numnodes=$( echo "${#nodeids[@]}")
+	echo "${j}/${numhighways}" ${highwayname}
 
+	numgeoms=$( echo ${highway} | jq ".geometry | length" )
 	k=0
-	while [ $k -lt $numnodes ]; do
+	while [ $k -lt $numgeoms ]; do
 
-		knodeid=${nodeids[$k]}
+		geomlat=$( echo ${highway} | jq ".geometry[${k}] | .lat" )
+		geomlon=$( echo ${highway} | jq ".geometry[${k}] | .lon" )
 
-		scoutingfornodes=$( jq ".elements[] | select(.id==${knodeid}) | length" nodes.json )
-		if (( scoutingfornodes > 0 )); then
-
-			nodelat=$( jq ".elements[] | select(.id==${knodeid}) | .lat" nodes.json )
-			nodelon=$( jq ".elements[] | select(.id==${knodeid}) | .lon" nodes.json )
-
-			# This is lazy stuff. It will probably fold any
-			# map that falls on the equator or meridian over
-			# on itself.
-			if (( $( round $nodelat 0 ) > 0 )); then # North of the equator
-				curline=$( round $( echo "( ${nb} - ${nodelat} ) * ${scaley}" | bc ) 0 )
-			else # South of the equator
-				curline=$( round $( echo "( ${nodelat} - ${sb} ) * ${scalex}" | bc ) 0 )
-			fi
-			if (( $( round $nodelon 0 ) > 0 )); then # East of Greenwich Meridian.
-				curcell=$( round $( echo "( ${eb} - ${nodelon} ) * ${scaley}" | bc ) 0 )
-			else # West of Greenwich Meridian.
-				curcell=$( round $( echo "( ${nodelon} - ${wb} ) * ${scalex}" | bc ) 0 )
-			fi
-
-			# So, idea is, give a one-cell margin around the
-			# edge so lines can be plotted to these edge
-			# nodes. Then cut the edge cells off. Is hacky.
-			if (( $curline < 1 )); then
-				let curline=1
-			fi
-			if (( $curline > $maplines )); then
-				let curline=$maplines
-			fi
-			if (( $curcell < 1 )); then
-				let curcell=1
-			fi
-			if (( $curcell > $mapcells )); then
-				let curcell=$mapcells
-			fi
-
-			# Draw a line between nodes.
-			if (( $k > 0 )); then
-				line $prevcell $prevline $curcell $curline $highwaymark $highwayname
-			fi
-			# Save the old values so we can plot a line
-			prevknodeid=$knodeid;
-			prevline=$curline
-			prevcell=$curcell
-		
+		# This is lazy stuff. It will probably fold any
+		# map that falls on the equator or meridian over
+		# on itself.
+		if (( $( round $geomlat 0 ) > 0 )); then # North of the equator
+			curline=$( round $( echo "( ${nb} - ${geomlat} ) * ${scaley}" | bc ) 0 )
+		else # South of the equator
+			curline=$( round $( echo "( ${geomlat} - ${sb} ) * ${scalex}" | bc ) 0 )
 		fi
+		if (( $( round $geomlon 0 ) > 0 )); then # East of Greenwich Meridian.
+			curcell=$( round $( echo "( ${eb} - ${geomlon} ) * ${scaley}" | bc ) 0 )
+		else # West of Greenwich Meridian.
+			curcell=$( round $( echo "( ${geomlon} - ${wb} ) * ${scalex}" | bc ) 0 )
+		fi
+
+		# So, idea is, give a one-cell margin around the
+		# edge so lines can be plotted to these edge
+		# geoms. Then cut the edge cells off. Is hacky.
+		if (( $curline < 1 )); then
+			let curline=1
+		fi
+		if (( $curline > $maplines )); then
+			let curline=$maplines
+		fi
+		if (( $curcell < 1 )); then
+			let curcell=1
+		fi
+		if (( $curcell > $mapcells )); then
+			let curcell=$mapcells
+		fi
+
+		# Draw a line between geoms.
+		if (( $k > 0 )); then
+			line $prevcell $prevline $curcell $curline $highwaymark $highwayname
+		fi
+		# Save the old values so we can plot a line
+		prevline=$curline
+		prevcell=$curcell
 
 		let k=k+1
 	done
@@ -189,11 +182,12 @@ done
 
 #tail -n +2 map.brf | head -n 8 | cut -c 2- > maplines.brf
 
-#cat maplines.brf
-#cat maplines.brf >> maps.brf
+rm /dev/shm/highway-locations.csv /dev/shm/map.brf
+cp /dev/shm/map.brf ./map.brf
+cp /dev/shm/highway-locations.csv ./highway-locations.csv
 
-cat map.brf >> maps.brf
-cat map.brf
+#cat map.brf >> maps.brf
+#cat map.brf
 
 exit
 
