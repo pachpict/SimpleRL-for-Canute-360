@@ -93,17 +93,20 @@ class Game(object):
 			elif neighbours[0] != ' ': self.y = self.y + 1
 			else: blocked = True
 
-		if blocked == True: raise BlockedMovement()
+		if blocked == True: 
+			self.transport = 'parked'
+			raise BlockedMovement()
+		else: self.transport = 'driving'
 
 		for highway_row in highway_csv:
 			if (int(highway_row[1])-1 == int(left_col+self.x) and
 				int(highway_row[0])-1 == int(top_row+self.y)):
-				self.add_message('You are '+transport+' on '+highway_row[2])
+				self.location = highway_row[2]
 
 	def draw_map(self, (left_col, top_row)):
 		for row in range(8):
 			self.screen.addstr(row, 0, MAP[top_row + row][left_col:left_col+40])
-		
+
 	def main(self):
 		key = None
 		with open(map_dir+'map-start.csv', mode='r') as map_start_file:
@@ -111,12 +114,16 @@ class Game(object):
 		with open(map_dir+'highway-locations.csv', mode='r') as highway_locations_file:
 			highway_csv = list(csv.reader(highway_locations_file))
 		self.x, self.y = int(map_start_csv[0][0]), int(map_start_csv[0][1])
+		self.transport = 'parked'
+		self.location = map_start_csv[1][2]
 		map_left_col = int(map_start_csv[1][0])
 		map_top_row = int(map_start_csv[1][1])
 		self.draw_map([map_left_col, map_top_row])
-		self.add_message('You, =, have started at '+map_start_csv[1][2])
+		self.screen.addstr(self.y, self.x, '=')
+		self.add_message('#, you have started at '+self.location)
 		direction = [0,0]
 		momentum = [0,0]
+		self.screen.getch()
 		while key != KEY_QUIT:
 			self.screen.addstr(self.y, self.x, '=')
 			# Hack to move cursor out the way
@@ -157,6 +164,7 @@ class Game(object):
 						map_top_row = map_top_row+6
 						self.move_player((0, -6), map_left_col, map_top_row, highway_csv)
 				self.draw_map([map_left_col, map_top_row])
+			self.add_message('You are '+self.transport+' on '+self.location)
 		self.screen.nodelay(False)
 
 if __name__ == '__main__':
