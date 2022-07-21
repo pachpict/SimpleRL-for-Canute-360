@@ -82,8 +82,8 @@ function line {
 # Creating the blank map.
 # Two cell margin needed for cut-off.
 rm map.brf highway-locations.csv /dev/shm/highway-locations.csv /dev/shm/map.brf
-mapcells=806
-maplines=254
+mapcells=400
+maplines=120
 filelines=0
 while [ ${filelines} -lt ${maplines} ]; do
 	printf "%-${mapcells}s\n" >> /dev/shm/map.brf
@@ -93,10 +93,10 @@ touch /dev/shm/highway-locations.csv
 
 # Set map scale.
 # Have a Mercator projection problem here, different 
-# ratios needed for different long:lats
+# ratios needed for different lats
 # London ratio: 3.5:2
-scalex=35000
-scaley=20000
+scalex=17500
+scaley=10000
 
 # Location bounding box.
 # OSM uses SWNE, but we are using shredded wheat, for sanity's sake.
@@ -109,8 +109,6 @@ wb=-2.6039797
 # Create wider catchment for nodes for those that go off edge of display.
 # Comment out whenever poss when testing due to OSM server limitations.
 #curl -g "https://overpass-api.de/api/interpreter?data=[out:json];way['highway']['name']($sb,$wb,$nb,$eb);out%20geom;" > highways.json
-
-#curl -g "https://overpass-api.de/api/interpreter?data=[out:json];node(around:400,$sb,$wb,$nb,$eb);way(bn)[highway];node(w)(around:400,$sb,$wb,$nb,$eb);out;" > nodes.json
 
 # Loop through the highways
 rm highway-locations.csv
@@ -182,9 +180,9 @@ done
 
 #tail -n +2 map.brf | head -n 8 | cut -c 2- > maplines.brf
 
-rm /dev/shm/highway-locations.csv /dev/shm/map.brf
 cp /dev/shm/map.brf ./map.brf
 cp /dev/shm/highway-locations.csv ./highway-locations.csv
+rm /dev/shm/highway-locations.csv /dev/shm/map.brf
 
 #cat map.brf >> maps.brf
 #cat map.brf

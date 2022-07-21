@@ -28,7 +28,7 @@ class Game(object):
 
 	def add_message(self, message):
 		self.screen.addstr(8, 0, "                                       ")
-		self.screen.addstr(8, 0, message)
+		self.screen.addstr(8, 0, message[0:38])
 
 	def move_player(self, (dx, dy), left_col, top_row, highway_csv):
 		x, y = self.x + dx, self.y + dy
@@ -58,21 +58,24 @@ class Game(object):
 		map_top_row = int(map_start_csv[1][1])
 		self.draw_map([map_left_col, map_top_row])
 		self.add_message('You, =, have started at '+map_start_csv[1][2])
+		direction = [0,0]
+		prevdirection = [0,0]
 		while key != KEY_QUIT:
 			self.screen.addstr(self.y, self.x, '=')
 			# Hack to move cursor out the way
 			self.screen.addstr(8, 39	, '')
+			stdscr.timeout(2000)
 			key = self.screen.getch()
+			prevdirection = direction
 			try:
 				direction = DIRECTIONS[key]
 			except KeyError:
+				direction = prevdirection
+			self.screen.addstr(self.y, self.x, ' ')
+			try:
+				self.move_player(direction, map_left_col, map_top_row, highway_csv)
+			except BlockedMovement:
 				pass
-			else:
-				self.screen.addstr(self.y, self.x, ' ')
-				try:
-					self.move_player(direction, map_left_col, map_top_row, highway_csv)
-				except BlockedMovement:
-					pass
 			if direction[0] != 0:
 				if self.x < 2:
 					map_left_col = map_left_col-38
@@ -94,6 +97,7 @@ class Game(object):
 					map_top_row = map_top_row+6
 					self.move_player((0, -6), map_left_col, map_top_row, highway_csv)
 			self.draw_map([map_left_col, map_top_row])
+		self.screen.nodelay(False)
 
 if __name__ == '__main__':
 	curses.wrapper(lambda screen: Game(screen).main())
