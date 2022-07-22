@@ -103,9 +103,27 @@ class Game(object):
 				int(highway_row[0])-1 == int(top_row+self.y)):
 				self.location = highway_row[2]
 
+		for story_row in self.story_csv:
+			if (int(story_row[0])-1 == int(left_col+self.x) and
+				int(story_row[1])-1 == int(top_row+self.y)):
+				self.story(story_row[2])
+
 	def draw_map(self, (left_col, top_row)):
 		for row in range(8):
 			self.screen.addstr(row, 0, MAP[top_row + row][left_col:left_col+40])
+
+	def story(self, story_page):
+		f = open(map_dir+'story/'+story_page,'r')
+		storylines = f.readlines()
+		# Mark story page as read
+		# Look for related story pages on same csv row and unmark them as usable
+		# That way a basic story telling multiple choice game engine.
+		for row in range(9):
+			self.screen.addstr(row, 0, "                                       ")
+		for row in range(9):
+			self.screen.addstr(row, 0, storylines[row])
+			self.screen.getch()
+		stdscr.timeout(720000)
 
 	def main(self):
 		key = None
@@ -113,6 +131,8 @@ class Game(object):
 			map_start_csv = list(csv.reader(map_start_file))
 		with open(map_dir+'highway-locations.csv', mode='r') as highway_locations_file:
 			highway_csv = list(csv.reader(highway_locations_file))
+		with open(map_dir+'story.csv', mode='r') as story_file:
+			self.story_csv = list(csv.reader(story_file))
 		self.x, self.y = int(map_start_csv[0][0]), int(map_start_csv[0][1])
 		self.transport = 'parked'
 		self.location = map_start_csv[1][2]
@@ -132,8 +152,9 @@ class Game(object):
 			key = self.screen.getch()
 			try: direction = DIRECTIONS[key]
 			except KeyError: direction = [0,0]
-			if direction[0] != 0: momentum[0] = direction[0]
-			if direction[1] != 0: momentum[1] = direction[1]
+			if direction[0] != 0 or direction[1] != 0: 
+				momentum[0] = direction[0]
+				momentum[1] = direction[1]
 			if key == KEY_BREAK:
 				momentum[0] = 0
 				momentum[1] = 0
