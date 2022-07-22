@@ -66,54 +66,55 @@ class Game(object):
 			neighbours[5], neighbours[6], neighbours[7] = ' '
 		if self.map_pos[0] == len(MAP[0]) and self.x > 38:
 			neighbours[1], neighbours[2], neighbours[3] = ' '
-
 		if self.map_pos[1] == 0 and self.y < 2:
 			neighbours[7], neighbours[0], neighbours[1] = ' '
 		if self.map_pos[1] == len(MAP) and self.x > 6:
 			neighbours[5], neighbours[4], neighbours[3] = ' '
 
 		# Need to change momentum if change direction of travel
+		# can do all the self.x, self.y at the end, replace them with momentum in the if statements.
+		# Can get rid of dx, dy
 		if dx > 1 or dx < -1 or dy > 1 or dy < -1:
 			self.x, self.y = self.x + dx, self.y + dy
-		elif dx == 0 and dy == -1:
-			if neighbours[0] != ' ': self.y = self.y - 1
-			elif neighbours[1] != ' ': self.x, self.y = self.x + 1, self.y - 1
-			elif neighbours[7] != ' ': self.x, self.y = self.x - 1, self.y - 1
+		elif dx == 0 and dy == -1: #N
+			if neighbours[0] != ' ': self.y = self.y - 1 #N
+			elif neighbours[1] != ' ': self.momentum[0], self.x, self.y = 1, self.x + 1, self.y - 1 #NE
+			elif neighbours[7] != ' ': self.momentum[0], self.x, self.y = 1, self.x - 1, self.y - 1 #NW
 			else: blocked = True
-		elif dx == 1 and dy == -1:
-			if neighbours[1] != ' ': self.x, self.y = self.x + 1, self.y - 1
-			elif neighbours[2] != ' ': self.x = self.x + 1
-			elif neighbours[0] != ' ': self.y = self.y - 1
+		elif dx == 1 and dy == -1: #NE
+			if neighbours[1] != ' ': self.x, self.y = self.x + 1, self.y - 1 #NE
+			elif neighbours[2] != ' ': self.momentum[1], self.x = 0, self.x + 1 #W
+			elif neighbours[0] != ' ': self.momentum[0], self.y = 0, self.y - 1 #N
 			else: blocked = True
-		elif dx == 1 and dy == 0:
-			if neighbours[2] != ' ': self.x = self.x + 1
-			elif neighbours[3] != ' ': self.x, self.y = self.x + 1, self.y + 1
-			elif neighbours[1] != ' ': self.x, self.y = self.x + 1, self.y - 1
+		elif dx == 1 and dy == 0: #E
+			if neighbours[2] != ' ': self.x = self.x + 1 #E
+			elif neighbours[3] != ' ': self.momentum[1], self.x, self.y = 1, self.x + 1, self.y + 1 #SE
+			elif neighbours[1] != ' ': self.momentum[1], self.x, self.y = -1, self.x + 1, self.y - 1 #NE
 			else: blocked = True
-		elif dx == 1 and dy == 1:
-			if neighbours[3] != ' ': self.x, self.y = self.x + 1, self.y + 1
-			elif neighbours[2] != ' ': self.x = self.x + 1
-			elif neighbours[4] != ' ': self.y = self.y + 1
+		elif dx == 1 and dy == 1: #SE
+			if neighbours[3] != ' ': self.x, self.y = self.x + 1, self.y + 1 #SE
+			elif neighbours[2] != ' ': self.momentum[1], self.x = 0, self.x + 1 #E
+			elif neighbours[4] != ' ': self.momentum[0], self.y = 0, self.y + 1 #S
 			else: blocked = True
-		elif dx == 0 and dy == 1:
-			if neighbours[4] != ' ': self.y = self.y + 1
-			elif neighbours[3] != ' ': self.x, self.y = self.x + 1, self.y + 1
-			elif neighbours[5] != ' ': self.x, self.y = self.x - 1, self.y + 1
+		elif dx == 0 and dy == 1: #S
+			if neighbours[4] != ' ': self.y = self.y + 1 #S
+			elif neighbours[3] != ' ': self.momentum[0], self.x, self.y = 1, self.x + 1, self.y + 1 #SE
+			elif neighbours[5] != ' ': self.momentum[0], self.x, self.y = -1, self.x - 1, self.y + 1 #SW
 			else: blocked = True
-		if dx == -1 and dy == 1:
-			if neighbours[5] != ' ': self.x, self.y = self.x - 1, self.y + 1
-			elif neighbours[6] != ' ': self.x = self.x - 1
-			elif neighbours[4] != ' ': self.y = self.y + 1
+		if dx == -1 and dy == 1: #SW
+			if neighbours[5] != ' ': self.x, self.y = self.x - 1, self.y + 1 #SW
+			elif neighbours[6] != ' ': self.momentum[1], self.x = 0, self.x - 1 #W
+			elif neighbours[4] != ' ': self.momentum[0], self.y = 0, self.y + 1 #S
 			else: blocked = True
-		elif dx == -1 and dy == 0:
-			if neighbours[6] != ' ': self.x = self.x - 1
-			elif neighbours[5] != ' ': self.x, self.y = self.x - 1, self.y + 1
-			elif neighbours[7] != ' ': self.x, self.y = self.x - 1, self.y - 1
+		elif dx == -1 and dy == 0: #W
+			if neighbours[6] != ' ': self.x = self.x - 1 #W
+			elif neighbours[5] != ' ': self.momentum[1], self.x, self.y = 1, self.x - 1, self.y + 1 #SW
+			elif neighbours[7] != ' ': self.momentum[1], self.x, self.y = -1, self.x - 1, self.y - 1 #NW
 			else: blocked = True
-		elif dx == -1 and dy == -1:
-			if neighbours[7] != ' ': self.x, self.y = self.x - 1, self.y - 1
-			elif neighbours[6] != ' ': self.x = self.x - 1
-			elif neighbours[0] != ' ': self.y = self.y + 1
+		elif dx == -1 and dy == -1: #NW
+			if neighbours[7] != ' ': self.x, self.y = self.x - 1, self.y - 1 #NW
+			elif neighbours[6] != ' ': self.momentum[1], self.x = 0, self.x - 1 #W
+			elif neighbours[0] != ' ': self.momentum[0], self.y = 0, self.y + 1 #N
 			else: blocked = True
 
 		if blocked == True: 
@@ -136,16 +137,17 @@ class Game(object):
 	def draw_map(self):
 		for row in range(8):
 			self.screen.addstr(row, 0, MAP[self.map_pos[1] + row][self.map_pos[0]:self.map_pos[0]+40])
+			# When clear() is uncommented in `def story` it exposes a bug  where only the self.transport part is added to the screen.
+			self.add_message('You are '+self.transport+' on '+self.location)
 
 	def story(self, story_page):
-		# If the story location is two cells from top it triggers three times...
-		f = open(map_dir+'story/'+story_page,'r')
-		storylines = f.readlines()
-		# Mark story page as read
+		# To do: Mark story page as read
 		# Look for related story pages on same csv row and unmark them as usable
 		# That way a basic story telling multiple choice game engine.
-		clear()
-		for row in range(8):
+		f = open(map_dir+'story/'+story_page,'r')
+		storylines = f.readlines()
+		#clear() # When is is on it exposes a bug in `def draw_map`, where only the self.transport part is added to the screen.
+		for row in range(min(8, len(storylines))):
 			self.screen.addstr(row, 0, storylines[row][0:39])
 			stdscr.timeout(self.speed)
 			self.screen.getch()
@@ -211,7 +213,6 @@ class Game(object):
 					map_change = True
 					self.move_player((0, -6), map_change)
 			self.draw_map()
-			self.add_message('You are '+self.transport+' on '+self.location)
 			self.screen.addstr(self.y, self.x, '=')
 			# Hack to move cursor out the way
 			self.screen.addstr(8, 39, '')
