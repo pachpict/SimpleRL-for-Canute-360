@@ -62,7 +62,17 @@ class Game(object):
 		# 7 0 1
 		# 6 x 2
 		# 5 4 3
+		if self.map_pos[0] == 0 and self.x < 2:
+			neighbours[5], neighbours[6], neighbours[7] = ' '
+		if self.map_pos[0] == len(MAP[0]) and self.x > 38:
+			neighbours[1], neighbours[2], neighbours[3] = ' '
 
+		if self.map_pos[1] == 0 and self.y < 2:
+			neighbours[7], neighbours[0], neighbours[1] = ' '
+		if self.map_pos[1] == len(MAP) and self.x > 6:
+			neighbours[5], neighbours[4], neighbours[3] = ' '
+
+		# Need to change momentum if change direction of travel
 		if dx > 1 or dx < -1 or dy > 1 or dy < -1:
 			self.x, self.y = self.x + dx, self.y + dy
 		elif dx == 0 and dy == -1:
