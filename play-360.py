@@ -150,10 +150,9 @@ class Game(object):
 		#clear() # When is is on it exposes a bug in `def draw_map`, where only the self.transport part is added to the screen.
 		for row in range(min(8, len(storylines))):
 			self.screen.addstr(row, 0, storylines[row][0:39])
-			stdscr.timeout(self.speed)
+			stdscr.timeout(3500)
 			self.screen.getch()
 		stdscr.timeout(720000)
-		self.screen.getch()
 
 	def main(self):
 		with open(map_dir+'map-start.csv', mode='r') as map_start_file:
@@ -168,7 +167,6 @@ class Game(object):
 			self.ways = list(csv.reader(highway_locations_file))
 		self.transport = 'parked'
 		self.momentum = [0,0]
-		self.speed = 3500
 		with open(map_dir+'story.csv', mode='r') as story_file:
 			self.story_csv = list(csv.reader(story_file))
 		self.story(self.story_csv[0][3])
@@ -176,8 +174,7 @@ class Game(object):
 		map_change = False
 		key = None
 		while key != KEY_QUIT:
-			if map_change == True: stdscr.timeout(10000+self.speed)
-			else: stdscr.timeout(self.speed)
+			if map_change == True: stdscr.timeout(10000)
 			key = self.screen.getch()
 			try: self.direction = DIRECTIONS[key]
 			except KeyError: self.direction = [0,0]

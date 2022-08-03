@@ -1,11 +1,8 @@
- - Add multi-page instructions.
- - Add levels.
- - Add practice levels.
+# Mostly map rendering:
+
  - Label roads clearly (first letter is unclear according to Paul and others), possibly by:
  	- Turning the map into a kind of word-search where the symbol painted cycles through the alphanumberic letters of the road name.
  	- Or, as suggested by Paul, actually label the roads in the traditional fashion, somehow.
- - Make momentum optional and default to no momentum (presents difficulties with diagonal movement).
- - Allow true one-move diagnonal movement.
  - Render maps at smaller scale, i.e. panned out. First try fitting about 150% on screen.
  - Also present overview first, really panned out, which shows general locations around town.
  - Cut out pedestrian ways.
@@ -13,4 +10,20 @@
  	- Paint trunk/main roads *after* normal roads so they get priority, *or*
  	- Paint underscore or similar non-alphanumberic symbol where roads intersect, *or*
  	- Some combination of the above that in some other way halps distinguish between roads.
+
+# Mostly interface:
+
+ - Add multi-page instructions.
+ - Add levels.
+ - Add practice levels.
  - Let location events turn on/of other location events.
+ - Allow true one-move diagnonal movement (https://www.geeksforgeeks.org/keyboard-module-in-python/).
+
+# Done:
+
+ x Scrap momentum (doing so creates difficulties with diagonal movement).
+
+# Cancelled:
+
+ - Make momentum optional and default to no momentum (presents difficulties with diagonal movement).
+
