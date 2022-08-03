@@ -71,8 +71,7 @@ class Game(object):
 		if self.map_pos[1] == len(MAP) and self.x > 6:
 			neighbours[5], neighbours[4], neighbours[3] = ' '
 
-		# Need to change momentum if change direction of travel
-		# can do all the self.x, self.y at the end, replace them with momentum in the if statements.
+		# Can do all the self.x, self.y at the end, replace them with momentum in the if statements.
 		# Can get rid of dx, dy
 		if dx > 1 or dx < -1 or dy > 1 or dy < -1:
 			self.x, self.y = self.x + dx, self.y + dy
@@ -132,6 +131,8 @@ class Game(object):
 				# to be triggered by another event (1/0)
 				if (int(story_row[1])-1 == int(self.map_pos[0]+self.x) and
 					int(story_row[2])-1 == int(self.map_pos[1]+self.y)):
+					self.break_movement()
+					self.add_message('You are '+self.transport+' on '+self.location)
 					self.story(story_row[3])
 
 	def draw_map(self):
@@ -151,7 +152,6 @@ class Game(object):
 			self.screen.addstr(row, 0, storylines[row][0:39])
 			stdscr.timeout(self.speed)
 			self.screen.getch()
-		self.break_movement()
 		stdscr.timeout(720000)
 		self.screen.getch()
 
