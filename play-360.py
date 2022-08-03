@@ -44,7 +44,7 @@ class Game(object):
 		self.momentum[1] = 0
 		self.transport = 'parked'
 
-	def move_player(self, (dx, dy), map_change):
+	def move_player(self, dx, dy, map_change):
 
 		blocked = False
 
@@ -189,7 +189,7 @@ class Game(object):
 			if self.momentum[0] != 0 or self.momentum[1] != 0:
 				map_change = False
 				try:
-					self.move_player(self.momentum, map_change)
+					self.move_player(self.momentum[0], self.momentum[1], map_change)
 				except BlockedMovement: self.break_movement()
 				pass
 				if self.x < 2 and self.momentum[0] < 0:
@@ -197,21 +197,21 @@ class Game(object):
 					if self.map_pos[0] < 0: self.map_pos[0] = 0
 					else:
 						map_change = True
-						self.move_player((+38, 0), map_change)
+						self.move_player(+38, 0, map_change)
 				elif self.x > 38 and self.momentum[0] > 0:
 					self.map_pos[0] = self.map_pos[0]+38
 					map_change = True
-					self.move_player((-38,0), map_change)
+					self.move_player(-38,0, map_change)
 				if self.y < 2 and self.momentum[1] < 0:
 					self.map_pos[1] = self.map_pos[1]-6
 					if self.map_pos[1] < 0: self.map_pos[1] = 0
 					else:
 						map_change = True
-						self.move_player((0, +6), map_change)
+						self.move_player(0, +6, map_change)
 				elif self.y > 6 and self.momentum[1] > 0:
 					self.map_pos[1] = self.map_pos[1]+6
 					map_change = True
-					self.move_player((0, -6), map_change)
+					self.move_player(0, -6, map_change)
 			self.draw_map()
 			self.screen.addstr(self.y, self.x, '=')
 			# Hack to move cursor out the way
