@@ -14,8 +14,8 @@ function line {
 	y0=$2
 	x1=$3
 	y1=$4
-	z=$5
- 
+#	z=$5
+
 	if (( x0 > x1 ))
 	then
 		(( dx = x0 - x1 ))
@@ -45,7 +45,6 @@ function line {
  
 	while :
 	do
-
 		newline=$y0
 		newcell=$x0
 		if (( newline < 1 )); then
@@ -61,8 +60,41 @@ function line {
 			let newcell=$mapcells
 		fi
 
-		sed -i "${newline}s/./${z}/${newcell}" /dev/shm/map.brf
-		echo "${newline}","${newcell}","${highwayname}" >> /dev/shm/highway-locations.csv
+	
+		if ( grep -Fq "${newline},${newcell},${highwayname}" /dev/shm/highway-locations.csv )
+		then
+			# This highway is already drawn here.
+			let nonesense=True
+		else
+			if ( grep -Fq "${newline},${newcell}" /dev/shm/highway-locations.csv )
+			then
+				# Another highway is already drawn here so back-paint the previous cell as an intersection.
+				if (( ${oldline} != -1 && ${oldcell} != -1 ))
+				then
+					sed -i "${oldline}s/${z}/,/${oldcell}" /dev/shm/map-wordsearch.brf
+				fi
+			else
+				# Drawing on this cell for the first time
+				if (( ${oldline} == -1 && ${oldcell} == -1 ))
+				then
+					# This must be start of the highway, so paint an intersection, because it probably is and this code lazy.
+					sed -i "${newline}s/./,/${newcell}" /dev/shm/map-wordsearch.brf
+					echo "${newline}","${newcell}","${highwayname}" >> /dev/shm/highway-locations.csv
+				else
+					# Otherwise paint the letters of the highway's name, one after another.
+					z=$( echo ${highwaymarks:${hwmi}:1} )
+					hwmi=$((hwmi+1))
+					if (( ${hwmi} == ${hwml} ))
+					then
+						hwmi=0
+					fi
+					sed -i "${newline}s/./${z}/${newcell}" /dev/shm/map-wordsearch.brf
+					echo "${newline},${newcell},${highwayname}" >> /dev/shm/highway-locations.csv
+				fi
+				oldline=${newline}
+				oldcell=${newcell}
+			fi
+		fi
 
 		(( x0 == x1 && y0 == y1 )) && return
 		(( e2 = err ))
@@ -80,13 +112,13 @@ function line {
 }
 
 # Creating the blank map.
-# Two cell margin needed for cut-off.
-rm map.brf highway-locations.csv /dev/shm/highway-locations.csv /dev/shm/map.brf
+# Two cell margin needed for cut-off..?
+rm map-wordsearch.brf highway-locations.csv /dev/shm/highway-locations.csv /dev/shm/map-wordsearch.brf
 mapcells=400
 maplines=120
 filelines=0
 while [ ${filelines} -lt ${maplines} ]; do
-	printf "%-${mapcells}s\n" >> /dev/shm/map.brf
+	printf "%-${mapcells}s\n" >> /dev/shm/map-wordsearch.brf
 	let filelines=filelines+1
 done
 touch /dev/shm/highway-locations.csv
@@ -108,14 +140,15 @@ wb=-2.6039797
 # Download all the named highways for that region from Open Street Map.
 # Create wider catchment for nodes for those that go off edge of display.
 # Comment out whenever poss when testing due to OSM server limitations.
+#curl -g "https://overpass-api.de/api/interpreter?data=[out:json];way[highway~'^(motorway|trunk|primary|secondary|tertiary|unclassified|(motorway|trunk|primary|secondary)_link)$']['name']($sb,$wb,$nb,$eb);out%20geom;" > highways.json
 #curl -g "https://overpass-api.de/api/interpreter?data=[out:json];way['highway']['name']($sb,$wb,$nb,$eb);out%20geom;" > highways.json
 
 # Loop through the highways
 rm highway-locations.csv
 j=0
 numhighways=$( jq '.elements | length' highways.json )
-if (( $numhighways > 999 )); then
-	let numhighways=999
+if (( $numhighways > 9999 )); then
+	let numhighways=9999
 fi
 
 while [ $j -lt $numhighways ]; do
@@ -124,6 +157,11 @@ while [ $j -lt $numhighways ]; do
 
 	highwayname=$( echo ${highway} | jq ".tags.name" | sed 's/"//g')
 	highwaymark=$( echo ${highwayname:0:1} | tr '[:upper:]' '[:lower:]')
+	highwaymarks=$( echo "${highwayname}---" | tr '[:upper:]' '[:lower:]' | sed 's/ street/ st/g'| sed 's/ lane/ ln/g' | sed 's/ avenue/ av/g' | sed 's/ road/ rd/g' | sed 's/ square/ sq/g' | sed 's/ /_/g')
+	hwml=$( echo ${#highwaymarks} )
+	hwmi=0
+	let oldline=-1
+	let oldcell=-1
 
 	echo "${j}/${numhighways}" ${highwayname}
 
@@ -178,14 +216,15 @@ while [ $j -lt $numhighways ]; do
 	let j=j+1
 done
 
-#tail -n +2 map.brf | head -n 8 | cut -c 2- > maplines.brf
+#tail -n +2 map-wordsearch.brf | head -n 8 | cut -c 2- > maplines.brf
 
-cp /dev/shm/map.brf ./map.brf
+cp /dev/shm/map-wordsearch.brf ./map-wordsearch.brf
 cp /dev/shm/highway-locations.csv ./highway-locations.csv
-rm /dev/shm/highway-locations.csv /dev/shm/map.brf
+rm /dev/shm/highway-locations.csv /dev/shm/map-wordsearch.brf
 
-#cat map.brf >> maps.brf
-#cat map.brf
+echo ${date} >> maps.brf
+cat map-wordsearch.brf >> maps.brf
+#cat map-wordsearch.brf
 
 exit
 
