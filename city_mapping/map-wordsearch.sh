@@ -61,36 +61,36 @@ function line {
 		fi
 
 	
-		if ( grep -Fq "${newline},${newcell},${highwayname}" /dev/shm/highway-locations.csv )
-		then
-			# This highway is already drawn here.
-			let nonesense=True
+		if ( grep -Fq "${newline},${newcell},${highwayname}" /dev/shm/map-wordsearch-highway-locations.csv )
+		then # This highway is already drawn here.
+			let nonsense=True
 		else
-			if ( grep -Fq "${newline},${newcell}" /dev/shm/highway-locations.csv )
-			then
-				# Another highway is already drawn here so back-paint the previous cell as an intersection.
-				if (( ${oldline} != -1 && ${oldcell} != -1 ))
-				then
-					sed -i "${oldline}s/${z}/,/${oldcell}" /dev/shm/map-wordsearch.brf
+			if ( grep -Fq "${newline},${newcell}" /dev/shm/map-wordsearch-highway-locations.csv )
+			then # Another highway is already drawn here 
+				if (( ${oldline} != -1 && ${oldcell} != -1 )) 
+				then 
+					if ( grep -Fq "${oldline},${oldcell},${highwayname}" /dev/shm/map-wordsearch-highway-locations.csv )
+					then # And last cell belongs to this highway, so back-paint previous cell as an intersection
+						sed -i "${oldline}s/./\-/${oldcell}" /dev/shm/map-wordsearch.brf
+						let hwmi=0
+					fi
 				fi
-			else
-				# Drawing on this cell for the first time
-				if (( ${oldline} == -1 && ${oldcell} == -1 ))
-				then
-					# This must be start of the highway, so paint an intersection, because it probably is and this code lazy.
-					sed -i "${newline}s/./,/${newcell}" /dev/shm/map-wordsearch.brf
-					echo "${newline}","${newcell}","${highwayname}" >> /dev/shm/highway-locations.csv
-				else
-					# Otherwise paint the letters of the highway's name, one after another.
+			else # Drawing on this cell for the first time
+#				if (( ${oldline} == -1 && ${oldcell} == -1 )) 
+#				then # Start of the highway, so we ignore cell on lazy assumption its intersection or not necessary
+#					let nonsense=True
+#					sed -i "${newline}s/./,/${newcell}" /dev/shm/map-wordsearch.brf
+#					echo "${newline}","${newcell}","${highwayname}" >> /dev/shm/map-wordsearch-highway-locations.csv
+#				else # Otherwise paint the letters of the highway's name, one after another.
 					z=$( echo ${highwaymarks:${hwmi}:1} )
+					sed -i "${newline}s/./${z}/${newcell}" /dev/shm/map-wordsearch.brf
+					echo "${newline},${newcell},${highwayname}" >> /dev/shm/map-wordsearch-highway-locations.csv
 					hwmi=$((hwmi+1))
 					if (( ${hwmi} == ${hwml} ))
 					then
 						hwmi=0
 					fi
-					sed -i "${newline}s/./${z}/${newcell}" /dev/shm/map-wordsearch.brf
-					echo "${newline},${newcell},${highwayname}" >> /dev/shm/highway-locations.csv
-				fi
+#				fi
 				oldline=${newline}
 				oldcell=${newcell}
 			fi
@@ -113,7 +113,7 @@ function line {
 
 # Creating the blank map.
 # Two cell margin needed for cut-off..?
-rm map-wordsearch.brf highway-locations.csv /dev/shm/highway-locations.csv /dev/shm/map-wordsearch.brf
+rm map-wordsearch.brf map-wordsearch-highway-locations.csv /dev/shm/map-wordsearch-highway-locations.csv /dev/shm/map-wordsearch.brf
 mapcells=400
 maplines=120
 filelines=0
@@ -121,7 +121,7 @@ while [ ${filelines} -lt ${maplines} ]; do
 	printf "%-${mapcells}s\n" >> /dev/shm/map-wordsearch.brf
 	let filelines=filelines+1
 done
-touch /dev/shm/highway-locations.csv
+touch /dev/shm/map-wordsearch-highway-locations.csv
 
 # Set map scale.
 # Have a Mercator projection problem here, different 
@@ -144,7 +144,7 @@ wb=-2.6039797
 #curl -g "https://overpass-api.de/api/interpreter?data=[out:json];way['highway']['name']($sb,$wb,$nb,$eb);out%20geom;" > highways.json
 
 # Loop through the highways
-rm highway-locations.csv
+rm map-wordsearch-highway-locations.csv
 j=0
 numhighways=$( jq '.elements | length' highways.json )
 if (( $numhighways > 9999 )); then
@@ -157,7 +157,7 @@ while [ $j -lt $numhighways ]; do
 
 	highwayname=$( echo ${highway} | jq ".tags.name" | sed 's/"//g')
 	highwaymark=$( echo ${highwayname:0:1} | tr '[:upper:]' '[:lower:]')
-	highwaymarks=$( echo "${highwayname}---" | tr '[:upper:]' '[:lower:]' | sed 's/ street/ st/g'| sed 's/ lane/ ln/g' | sed 's/ avenue/ av/g' | sed 's/ road/ rd/g' | sed 's/ square/ sq/g' | sed 's/ /_/g')
+	highwaymarks=$( echo " ${highwayname} " | tr '[:upper:]' '[:lower:]' | sed 's/ street / st /g'| sed 's/ lane / ln /g' | sed 's/ avenue / av /g' | sed 's/ road / rd /g' | sed 's/ square / sq /g' | sed 's/ /-/g')
 	hwml=$( echo ${#highwaymarks} )
 	hwmi=0
 	let oldline=-1
@@ -219,8 +219,8 @@ done
 #tail -n +2 map-wordsearch.brf | head -n 8 | cut -c 2- > maplines.brf
 
 cp /dev/shm/map-wordsearch.brf ./map-wordsearch.brf
-cp /dev/shm/highway-locations.csv ./highway-locations.csv
-rm /dev/shm/highway-locations.csv /dev/shm/map-wordsearch.brf
+cp /dev/shm/map-wordsearch-highway-locations.csv ./map-wordsearch-highway-locations.csv
+rm /dev/shm/map-wordsearch-highway-locations.csv /dev/shm/map-wordsearch.brf
 
 echo ${date} >> maps.brf
 cat map-wordsearch.brf >> maps.brf
