@@ -2,25 +2,24 @@
 
 ## Mostly map rendering:
 
- - Label roads clearly (first letter is unclear according to Paul and others), possibly by:
- 	- Turning the map into a kind of word-search where the symbol painted cycles through the alphanumberic letters of the road name.
  - Also present overview first, really panned out, which shows general locations around town.
- - Paint underscore or similar non-alphanumberic symbol where roads intersect. Started...
- 	- Current issues are that it doesn't work very reliably (why?), and...
- 	- ... Even if it did it would leave too many letter jumbles, so...
- - Needs to blank out the letters on roads (with intersect character like "-") when they are near alternative roads, possibly with...
- 	- ... A left-right check, blanking out any letters on cells to the left and right that belong to other highways, or something like it.
- 	- Duel carriage ways are a problem; OSM doesn't seem to distinguish between the nodes for each lane, but having both lanes creates a total mess of letters.
-
-## For inverted mode map rendering: 
+ - Add buildings as another letter on the map, maybe with hyphens.
 
 ## Mostly interface:
 
- - Add multi-page instructions.
+ - Remove the reference to 'driving' as the interaction is no longer like driving, and are proposing going into buildings.
+ - Allow user to write their own story on the fly:
+ 	- Display co-ordinates so user can alt tab to the story csv and dir to add new story point.
+ - Add instructions.
+ - Stop user falling off edge of the world and crashing the program.
  - Add levels.
- - Add practice levels.
+ - Add practice levels and tutorials.
+ - Add The Mall, Cribbs Causeway, for Paul.
+ - Add the hotel for major conferences, for conferences.
  - Let location events turn on/of other location events.
  - Allow true one-move diagnonal movement (https://pypi.org/project/keyboard/, https://stackoverflow.com/questions/52910090/how-to-check-for-multiple-key-presses-in-python-keyboard-module, https://github.com/boppreh/keyboard#api).
+
+ --------------------------------------------------------------
 
 # Done:
 
@@ -28,6 +27,11 @@
  x Cut out pedestrian ways.
  x Create inverted map version for alternative game modes (clear roads because when you are on them they are labelled).
  x Make the roads wider horizontally on inverted generation.
+ x Label roads clearly (first letter is unclear according to Paul and others), possibly by:
+ 	x Turning the map into a kind of word-search where the symbol painted cycles through the alphanumberic letters of the road name.
+ x Needs to blank out the letters on roads (with intersect character like "-") when they are near alternative roads, possibly with a left-right check, blanking out any letters on cells to the left and right that belong to other highways, or something like it.
+ x Decided in favour of inverted mode, have archived the word-search mode.
+ x Make the map centre when travelling left or right off edge (am not doing same for up/down as its my assumption that would be too arduous for travel as can only then travel four lines without map refresh).
 
 # Cancelled:
 
@@ -35,4 +39,8 @@
  - Paint trunk/main roads *after* normal roads so they get priority
  - Render maps at smaller scale, i.e. panned out. First try fitting about 150% on screen (tried it and it made it worse).
  - As suggested by Paul, actually label the roads in the traditional fashion, somehow.
+ - Paint underscore or similar non-alphanumberic symbol where roads intersect. Started...
+ 	- Current issues are that it doesn't work very reliably (why?), and...
+ 	- ... Even if it did it would leave too many letter jumbles, so...
+ 	- Duel carriage ways are a problem; OSM doesn't seem to distinguish between the nodes for each lane, but having both lanes creates a total mess of letters.
 

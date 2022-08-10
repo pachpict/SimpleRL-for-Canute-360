@@ -159,8 +159,7 @@ class Game(object):
 		#clear() # When is is on it exposes a bug in `def draw_map`, where only the self.transport part is added to the screen.
 		for row in range(min(8, len(storylines))):
 			self.screen.addstr(row, 0, storylines[row][0:39])
-			stdscr.timeout(3500)
-			self.screen.getch()
+		self.screen.getch()
 
 	def main(self):
 		with open(map_dir+'map-start.csv', mode='r') as map_start_file:
@@ -183,7 +182,6 @@ class Game(object):
 		map_change = False
 		key = None
 		while key != KEY_QUIT:
-			if map_change == True: stdscr.timeout(10000)
 			key = self.screen.getch()
 			try: self.direction = DIRECTIONS[key]
 			except KeyError: self.direction = [0,0]

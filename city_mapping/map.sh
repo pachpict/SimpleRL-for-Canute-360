@@ -62,28 +62,28 @@ function line {
 
 	
 		# A lot of the following is hang-over from word-search and should be cut
-		if ( grep -Fq "${newline},${newcell},${highwayname}" /dev/shm/map-inverted-highway-locations.csv )
+		if ( grep -Fq "${newline},${newcell},${highwayname}" /dev/shm/highway-locations.csv )
 		then
 			# This highway is already drawn here.
 			let nonsense=True
 		else
-			if ( grep -Fq "${newline},${newcell}" /dev/shm/map-inverted-highway-locations.csv )
+			if ( grep -Fq "${newline},${newcell}" /dev/shm/highway-locations.csv )
 			then
 				# Another highway is already drawn here so back-paint the previous cell as an intersection.
 				if (( ${oldline} != -1 && ${oldcell} != -1 ))
 				then
-					sed -i "${oldline}s/${z}/ /${oldcell}" /dev/shm/map-inverted.brf
-					sed -i "${oldline}s/${z}/ /$((oldcell+1))" /dev/shm/map-inverted.brf
+					sed -i "${oldline}s/${z}/ /${oldcell}" /dev/shm/map.brf
+					sed -i "${oldline}s/${z}/ /$((oldcell+1))" /dev/shm/map.brf
 				fi
 			else
 				# Drawing on this cell for the first time
 				if (( ${oldline} == -1 && ${oldcell} == -1 ))
 				then
 					# This must be start of the highway.
-					sed -i "${newline}s/./ /${newcell}" /dev/shm/map-inverted.brf
-					sed -i "${newline}s/./ /$((newcell+1))" /dev/shm/map-inverted.brf
-					echo "${newline}","${newcell}","${highwayname}" >> /dev/shm/map-inverted-highway-locations.csv
-					echo "${newline}","$((newcell+1))","${highwayname}" >> /dev/shm/map-inverted-highway-locations.csv
+					sed -i "${newline}s/./ /${newcell}" /dev/shm/map.brf
+					sed -i "${newline}s/./ /$((newcell+1))" /dev/shm/map.brf
+					echo "${newline}","${newcell}","${highwayname}" >> /dev/shm/highway-locations.csv
+					echo "${newline}","$((newcell+1))","${highwayname}" >> /dev/shm/highway-locations.csv
 				else
 					# Otherwise paint whitespace.
 					z=$( echo ${highwaymarks:${hwmi}:1} )
@@ -92,10 +92,10 @@ function line {
 					then
 						hwmi=0
 					fi
-					sed -i "${newline}s/./ /${newcell}" /dev/shm/map-inverted.brf
-					sed -i "${newline}s/./ /$((newcell+1))" /dev/shm/map-inverted.brf
-					echo "${newline},${newcell},${highwayname}" >> /dev/shm/map-inverted-highway-locations.csv
-					echo "${newline}","$((newcell+1))","${highwayname}" >> /dev/shm/map-inverted-highway-locations.csv
+					sed -i "${newline}s/./ /${newcell}" /dev/shm/map.brf
+					sed -i "${newline}s/./ /$((newcell+1))" /dev/shm/map.brf
+					echo "${newline},${newcell},${highwayname}" >> /dev/shm/highway-locations.csv
+					echo "${newline}","$((newcell+1))","${highwayname}" >> /dev/shm/highway-locations.csv
 				fi
 				oldline=${newline}
 				oldcell=${newcell}
@@ -119,16 +119,16 @@ function line {
 
 # Creating the blank map.
 # Two cell margin needed for cut-off..?
-rm map-inverted.brf map-inverted-highway-locations.csv /dev/shm/map-inverted-highway-locations.csv /dev/shm/map-inverted.brf
+rm map.brf highway-locations.csv /dev/shm/highway-locations.csv /dev/shm/map.brf
 mapcells=400
 maplines=120
 filelines=0
 date=$(date '+%Y%m%d-%H%M%S');
 while [ ${filelines} -lt ${maplines} ]; do
-	printf "%-${mapcells}s\n" "=" | sed 's/ /=/g' >> /dev/shm/map-inverted.brf
+	printf "%-${mapcells}s\n" "=" | sed 's/ /=/g' >> /dev/shm/map.brf
 	let filelines=filelines+1
 done
-touch /dev/shm/map-inverted-highway-locations.csv
+touch /dev/shm/highway-locations.csv
 
 # Set map scale.
 # Have a Mercator projection problem here, different 
@@ -147,11 +147,12 @@ wb=-2.6039797
 # Download all the named highways for that region from Open Street Map.
 # Create wider catchment for nodes for those that go off edge of display.
 # Comment out whenever poss when testing due to OSM server limitations.
+#curl -g "https://overpass-api.de/api/interpreter?data=[out:json];way['building']['name']($sb,$wb,$nb,$eb);out%20geom;" > buildings.json
 curl -g "https://overpass-api.de/api/interpreter?data=[out:json];way[highway~'^(motorway|trunk|primary|secondary|tertiary|unclassified|(motorway|trunk|primary|secondary)_link)$']['name']($sb,$wb,$nb,$eb);out%20geom;" > highways.json
 #curl -g "https://overpass-api.de/api/interpreter?data=[out:json];way['highway']['name']($sb,$wb,$nb,$eb);out%20geom;" > highways.json
 
 # Loop through the highways
-rm map-inverted-highway-locations.csv
+rm highway-locations.csv
 j=0
 numhighways=$( jq '.elements | length' highways.json )
 if (( $numhighways > 9999 )); then
@@ -211,7 +212,7 @@ while [ $j -lt $numhighways ]; do
 
 		# Draw a line between geoms.
 		if (( $k > 0 )); then
-			line $prevcell $prevline $curcell $curline $highwaymark $highwayname
+			line $prevcell $prevline $curcell $curline 
 		fi
 		# Save the old values so we can plot a line
 		prevline=$curline
@@ -223,15 +224,13 @@ while [ $j -lt $numhighways ]; do
 	let j=j+1
 done
 
-#tail -n +2 map-inverted.brf | head -n 8 | cut -c 2- > maplines.brf
+cp /dev/shm/map.brf ./map.brf
+cp /dev/shm/highway-locations.csv ./highway-locations.csv
+rm /dev/shm/highway-locations.csv /dev/shm/map.brf
 
-cp /dev/shm/map-inverted.brf ./map-inverted.brf
-cp /dev/shm/map-inverted-highway-locations.csv ./map-inverted-highway-locations.csv
-rm /dev/shm/map-inverted-highway-locations.csv /dev/shm/map-inverted.brf
-
-echo ${date} >> maps.brf
-cat map-inverted.brf >> maps.brf
-#cat map-inverted.brf
+echo ${date} >> archive/maps.brf
+cat map.brf >> archive/maps.brf
+#cat map.brf
 
 exit
 

@@ -7,10 +7,10 @@ from os import system, name
 stdscr = curses.initscr()
 
 map_dir="city_mapping/"
-map_file = open(map_dir+"map-inverted.brf", "r")
-locs_file = open(map_dir+'map-inverted-highway-locations.csv', "r")
+map_file = open(map_dir+"map.brf", "r")
+locs_file = open(map_dir+'highway-locations.csv', "r")
 character = 'i'
-wall = '='						
+wall = '='
 MAP = map_file.readlines()
 
 KEY_QUIT = ord('q')
@@ -46,6 +46,11 @@ class Game(object):
 		self.momentum[0] = 0
 		self.momentum[1] = 0
 		self.transport = 'parked'
+
+	def replay_story(self):
+		self.break_movement()
+		self.draw_map()
+		self.story(self.prev_story)
 
 	def move_player(self, dx, dy, map_change):
 
@@ -136,7 +141,8 @@ class Game(object):
 					int(story_row[2])-1 == int(self.map_pos[1]+self.y)):
 					self.break_movement()
 					self.add_message('You are '+self.transport+' on '+self.location)
-					self.story(story_row[3])
+					self.prev_story = story_row[3]
+					self.story(self.prev_story)
 
 	def draw_map(self):
 		for row in range(8):
@@ -153,8 +159,7 @@ class Game(object):
 		#clear() # When is is on it exposes a bug in `def draw_map`, where only the self.transport part is added to the screen.
 		for row in range(min(8, len(storylines))):
 			self.screen.addstr(row, 0, storylines[row][0:39])
-			stdscr.timeout(3500)
-			self.screen.getch()
+		self.screen.getch()
 
 	def main(self):
 		with open(map_dir+'map-start.csv', mode='r') as map_start_file:
@@ -171,19 +176,23 @@ class Game(object):
 		self.momentum = [0,0]
 		with open(map_dir+'story.csv', mode='r') as story_file:
 			self.story_csv = list(csv.reader(story_file))
-		self.story(self.story_csv[0][3])
+		self.prev_story = self.story_csv[0][3]
+		self.story(self.prev_story)
 		direction = [0,0]
 		map_change = False
 		key = None
+		self.draw_map()
+		self.screen.addstr(self.y, self.x, character)
+		# Hack to move cursor out the way
+		self.screen.addstr(8, 39, '')
 		while key != KEY_QUIT:
-			if map_change == True: stdscr.timeout(10000)
 			key = self.screen.getch()
 			try: self.direction = DIRECTIONS[key]
 			except KeyError: self.direction = [0,0]
 			if self.direction[0] != 0 or self.direction[1] != 0: 
 				self.momentum[0] = self.direction[0]
 				self.momentum[1] = self.direction[1]
-			if key == KEY_BREAK: self.break_movement()
+			if key == KEY_BREAK: self.replay_story()
 #			self.screen.addstr(self.y, self.x, ' ')
 			if self.momentum[0] != 0 or self.momentum[1] != 0:
 				map_change = False
@@ -192,15 +201,15 @@ class Game(object):
 				except BlockedMovement: self.break_movement()
 				pass
 				if self.x < 2 and self.momentum[0] < 0:
-					self.map_pos[0] = self.map_pos[0]-38
+					self.map_pos[0] = self.map_pos[0]-19
 					if self.map_pos[0] < 0: self.map_pos[0] = 0
 					else:
 						map_change = True
-						self.move_player(+38, 0, map_change)
+						self.move_player(+19, 0, map_change)
 				elif self.x > 38 and self.momentum[0] > 0:
-					self.map_pos[0] = self.map_pos[0]+38
+					self.map_pos[0] = self.map_pos[0]+19
 					map_change = True
-					self.move_player(-38,0, map_change)
+					self.move_player(-19,0, map_change)
 				if self.y < 2 and self.momentum[1] < 0:
 					self.map_pos[1] = self.map_pos[1]-6
 					if self.map_pos[1] < 0: self.map_pos[1] = 0
