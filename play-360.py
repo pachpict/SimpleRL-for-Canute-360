@@ -144,15 +144,19 @@ class Game(object):
 				if (int(story_row[1])-1 == int(self.map_pos[0]+self.x) and
 					int(story_row[2])-1 == int(self.map_pos[1]+self.y)):
 					self.break_movement()
-					self.add_message('You are '+self.on_in+' '+self.location)
+					self.describe_location()
 					self.prev_story = story_row[3]
 					self.story(self.prev_story)
+
+	def describe_location(self):
+		# When clear() is uncommented in `def story` it exposes a bug  where only the self.transport/in_on part is added to the screen.
+		posi=[str(self.map_pos[0] + self.x + 1),str(self.map_pos[1] + self.y + 1)]
+		self.add_message(posi[0]+','+posi[1]+': You are '+self.on_in+' '+self.location)
 
 	def draw_map(self):
 		for row in range(8):
 			self.screen.addstr(row, 0, MAP[self.map_pos[1] + row][self.map_pos[0]:self.map_pos[0]+40])
-			# When clear() is uncommented in `def story` it exposes a bug  where only the self.transport/in_on part is added to the screen.
-			self.add_message('You are '+self.on_in+' '+self.location)
+			self.describe_location()
 
 	def story(self, story_page):
 		# To do: Mark story page as read

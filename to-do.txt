@@ -7,19 +7,18 @@
 
 ## Mostly interface:
 
- - Remove the reference to 'driving' as the interaction is no longer like driving, and are proposing going into buildings.
+
  - Allow user to write their own story on the fly:
- 	- Display co-ordinates so user can alt tab to the story csv and dir to add new story point.
  - Add instructions.
  - Stop user falling off edge of the world and crashing the program.
  - Add levels.
- - Add practice levels and tutorials.
- - Add The Mall, Cribbs Causeway, for Paul.
- - Add the hotel for major conferences, for Braille conferences.
+	 - Add practice levels and tutorials.
+	 - Add The Mall, Cribbs Causeway, for Paul.
+	 - Add the hotel for major conferences, for Braille conferences.
  - Let location events turn on/of other location events.
+ 	- Turn off by story file not by line number, as need to be able to define multiple points for story to occur, mostly just points next to each other.
  - Allow true one-move diagnonal movement (https://pypi.org/project/keyboard/, https://stackoverflow.com/questions/52910090/how-to-check-for-multiple-key-presses-in-python-keyboard-module, https://github.com/boppreh/keyboard#api).
  - Fill in ways for buildings? Currently they are outlines. Requires new line drawing function. They ought to be filled in if you are showing top down view of how one moves around a city, but then again getting the shape is quite nice and maybe better for appreciating form.
- - Now are travelling by foot add pedestrian ways back in..? Could be too busy. On other hand could be too empty without it. Why is there no Corn St, for example? 
  - Add fuzzy logic "Go to way" search, which wangs the player to the closest match for the string they enter. (https://typesense.org/learn/fuzzy-string-matching-python/)
 
  --------------------------------------------------------------
@@ -35,6 +34,9 @@
  x Needs to blank out the letters on roads (with intersect character like "-") when they are near alternative roads, possibly with a left-right check, blanking out any letters on cells to the left and right that belong to other highways, or something like it.
  x Decided in favour of inverted mode, have archived the word-search mode.
  x Make the map centre when travelling left or right off edge (am not doing same for up/down as its my assumption that would be too arduous for travel as can only then travel four lines without map refresh).
+ x Remove the reference to 'driving' as the interaction is no longer like driving, and are proposing going into buildings.
+ x Now are travelling by foot add pedestrian ways back in.
+ x Display co-ordinates so user can alt tab to the story csv and dir to add new story point.
 
 # Cancelled:
 
