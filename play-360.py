@@ -8,10 +8,9 @@ stdscr = curses.initscr()
 
 map_dir="city_mapping/"
 map_file = open(map_dir+"map.brf", "r")
-locs_file = open(map_dir+'highway-locations.csv', "r")
+locs_file = open(map_dir+'way-locations.csv', "r")
 character = 'i'
 wall = '='
-indoors = '-'
 MAP = map_file.readlines()
 
 KEY_QUIT = ord('q')
@@ -134,6 +133,10 @@ class Game(object):
 			if (int(highway_row[1])-1 == int(self.map_pos[0]+self.x) and
 				int(highway_row[0])-1 == int(self.map_pos[1]+self.y)):
 				self.location = highway_row[2]
+				if highway_row[3] == 'building':
+					self.on_in = 'in'
+				else:
+					self.on_in = 'on'
 		if map_change == False:
 			for story_row in self.story_csv:
 				# First cell is whether it is unlocked by default or has
@@ -141,15 +144,15 @@ class Game(object):
 				if (int(story_row[1])-1 == int(self.map_pos[0]+self.x) and
 					int(story_row[2])-1 == int(self.map_pos[1]+self.y)):
 					self.break_movement()
-					self.add_message('You are '+self.transport+' '+self.in_on+' '+self.location)
+					self.add_message('You are '+self.on_in+' '+self.location)
 					self.prev_story = story_row[3]
 					self.story(self.prev_story)
 
 	def draw_map(self):
 		for row in range(8):
 			self.screen.addstr(row, 0, MAP[self.map_pos[1] + row][self.map_pos[0]:self.map_pos[0]+40])
-			# When clear() is uncommented in `def story` it exposes a bug  where only the self.transport part is added to the screen.
-			self.add_message('You are '+self.transport+' '+self.in_on+' '+self.location)
+			# When clear() is uncommented in `def story` it exposes a bug  where only the self.transport/in_on part is added to the screen.
+			self.add_message('You are '+self.on_in+' '+self.location)
 
 	def story(self, story_page):
 		# To do: Mark story page as read
@@ -174,7 +177,7 @@ class Game(object):
 		with locs_file as highway_locations_file:
 			self.ways = list(csv.reader(highway_locations_file))
 		self.transport = 'standing'
-		self.in_on = 'on'
+		self.on_in = 'on'
 		self.momentum = [0,0]
 		with open(map_dir+'story.csv', mode='r') as story_file:
 			self.story_csv = list(csv.reader(story_file))

@@ -64,7 +64,8 @@ function line {
 		# sed -i "${newline}s/${wall}/etc/etc
 		# This would mean checking that the play-360.py is only reading from the 
 		# first matching line in the CSV file. 
-		# Doing so should speed this up some.
+		# Doing so should speed this up immensely.
+
 		if ( grep -Fq "${newline},${newcell},${wayname}" /dev/shm/way-locations.csv )
 		then
 			# This way is already drawn here.
@@ -88,13 +89,10 @@ function line {
 					sed -i "${newline}s/./${waymark}/$((newcell+1))" /dev/shm/map.brf
 					echo "${newline}","$((newcell+1))","${wayname}","${waytype}" >> /dev/shm/way-locations.csv
 				fi
+				oldline=${newline}
+				oldcell=${newcell}
 			fi
 		fi
-		# ... Like so? Breaks things.
-#		sed -i "${newline}s/${wall}/${waymark}/${newcell}" /dev/shm/map.brf
-#		echo "${newline},${newcell},${wayname}","${waytype}" >> /dev/shm/way-locations.csv
-#		sed -i "${newline}s/${wall}/${waymark}/$((newcell+1))" /dev/shm/map.brf
-#		echo "${newline}","$((newcell+1))","${wayname}","${waytype}" >> /dev/shm/way-locations.csv
 
 		(( x0 == x1 && y0 == y1 )) && return
 		(( e2 = err ))
@@ -118,7 +116,7 @@ function findways {
 	waymark=${3}
 	waytype=${4}
 
-	echo "Finding ways in "${wayfile}
+	echo "Finding ways in "+${wayfile}
 
 	j=0
 	numways=$( jq '.elements | length' ${wayfile} )
@@ -130,6 +128,8 @@ function findways {
 
 		way=$( jq ".elements[${j}]" ${wayfile})
 		wayname=$( echo ${way} | jq ".tags.name" | sed 's/"//g' | sed 's/ Street/ St/g'| sed 's/ Lane/ Ln/g' | sed 's/ Avenue/ Av/g' | sed 's/ Road/ Rd/g' | sed 's/ Square/ Sq/g' | sed 's/Saint /St /g' )
+		let oldline=-1
+		let oldcell=-1
 
 		echo "${j}/${numways}" ${wayname}
 
@@ -211,7 +211,6 @@ eb=-2.5821023
 sb=51.4484943
 wb=-2.6039797
 
-wall='='
 
 rm way-locations.csv
 
@@ -226,12 +225,10 @@ findways "major-highways.json" 9999 ' ' 'road'
 # Call for other highways
 #curl -g "https://overpass-api.de/api/interpreter?data=[out:json];way[highway][highway!~'^(motorway|trunk|primary|secondary|tertiary|unclassified|(motorway|trunk|primary|secondary)_link)$']['name']($sb,$wb,$nb,$eb);out%20geom;" > minor-highways.json
 
-findways "minor-highways.json" 9999 " " 'path'
+findways "minor-highways.json" 9999 "'" 'path'
 
 # Call for all buildings
 #curl -g "https://overpass-api.de/api/interpreter?data=[out:json];way['building']['name']($sb,$wb,$nb,$eb);out%20geom;" > buildings.json
-# Untested call with less buildings returned
-#curl -g "https://overpass-api.de/api/interpreter?data=[out:json];way['building'][building!~'^(office)$][amenity!~'^(parking)$]['name']($sb,$wb,$nb,$eb);out%20geom;" > buildings.json
 
 findways "buildings.json" 9999 '7' 'building'
 
