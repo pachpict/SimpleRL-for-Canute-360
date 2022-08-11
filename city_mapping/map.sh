@@ -152,15 +152,93 @@ eb=-2.5821023
 sb=51.4484943
 wb=-2.6039797
 
-# Download all the named highways for that region from Open Street Map.
-# Create wider catchment for nodes for those that go off edge of display.
+# Download all the named highways and or buildings for that region from Open Street Map.
 # Comment out whenever poss when testing due to OSM server limitations.
+
+# Call for all buildings
 #curl -g "https://overpass-api.de/api/interpreter?data=[out:json];way['building']['name']($sb,$wb,$nb,$eb);out%20geom;" > buildings.json
+
+# Call for drivable highways
 #curl -g "https://overpass-api.de/api/interpreter?data=[out:json];way[highway~'^(motorway|trunk|primary|secondary|tertiary|unclassified|(motorway|trunk|primary|secondary)_link)$']['name']($sb,$wb,$nb,$eb);out%20geom;" > highways.json
+
+# This call is for all highways, including steps, pedetrian ones, et cetera:
 #curl -g "https://overpass-api.de/api/interpreter?data=[out:json];way['highway']['name']($sb,$wb,$nb,$eb);out%20geom;" > highways.json
 
-# Loop through the highways
 rm way-locations.csv
+
+# Loop through the buildings
+# This and highways should be one function, but this is just a quick and dirty test.
+j=0
+numways=$( jq '.elements | length' buildings.json )
+if (( $numways > 9999 )); then
+	let numways=9999
+fi
+
+while [ $j -lt $numways ]; do
+
+	way=$( jq ".elements[${j}]" buildings.json)
+	wayname=$( echo ${way} | jq ".tags.name" | sed 's/"//g' | sed 's/ Street/ St/g'| sed 's/ Lane/ Ln/g' | sed 's/ Avenue/ Av/g' | sed 's/ Road/ Rd/g' | sed 's/ Square/ Sq/g' | sed 's/Saint /St /g' )
+
+	waymark='-'
+	let oldline=-1
+	let oldcell=-1
+
+	echo "${j}/${numways}" ${wayname}
+
+	numgeoms=$( echo ${way} | jq ".geometry | length" )
+	k=0
+	while [ $k -lt $numgeoms ]; do
+
+		geomlat=$( echo ${way} | jq ".geometry[${k}] | .lat" )
+		geomlon=$( echo ${way} | jq ".geometry[${k}] | .lon" )
+
+		# This is lazy stuff. It will probably fold any
+		# map that falls on the equator or meridian over
+		# on itself.
+		if (( $( round $geomlat 0 ) > 0 )); then # North of the equator
+			curline=$( round $( echo "( ${nb} - ${geomlat} ) * ${scaley}" | bc ) 0 )
+		else # South of the equator
+			curline=$( round $( echo "( ${geomlat} - ${sb} ) * ${scalex}" | bc ) 0 )
+		fi
+		if (( $( round $geomlon 0 ) > 0 )); then # East of Greenwich Meridian.
+			curcell=$( round $( echo "( ${eb} - ${geomlon} ) * ${scaley}" | bc ) 0 )
+		else # West of Greenwich Meridian.
+			curcell=$( round $( echo "( ${geomlon} - ${wb} ) * ${scalex}" | bc ) 0 )
+		fi
+
+		# So, idea is, give a one-cell margin around the
+		# edge so lines can be plotted to these edge
+		# geoms. Then cut the edge cells off. Is hacky.
+		if (( $curline < 1 )); then
+			let curline=1
+		fi
+		if (( $curline > $maplines )); then
+			let curline=$maplines
+		fi
+		if (( $curcell < 1 )); then
+			let curcell=1
+		fi
+		if (( $curcell > $mapcells )); then
+			let curcell=$mapcells
+		fi
+
+		# Draw a line between geoms.
+		if (( $k > 0 )); then
+			line $prevcell $prevline $curcell $curline 
+		fi
+		# Save the old values so we can plot a line
+		prevline=$curline
+		prevcell=$curcell
+
+		let k=k+1
+	done
+
+	let j=j+1
+done
+ --------------
+
+# Loop through the highways
+# This and buildings should be one function, but this is just a quick and dirty test.
 j=0
 numways=$( jq '.elements | length' highways.json )
 if (( $numways > 9999 )); then
@@ -170,7 +248,7 @@ fi
 while [ $j -lt $numways ]; do
 
 	way=$( jq ".elements[${j}]" highways.json)
-	wayname=$( echo ${way} | jq ".tags.name" | sed 's/"//g')
+	wayname=$( echo ${way} | jq ".tags.name" | sed 's/"//g' | sed 's/ Street/ St/g'| sed 's/ Lane/ Ln/g' | sed 's/ Avenue/ Av/g' | sed 's/ Road/ Rd/g' | sed 's/ Square/ Sq/g' | sed 's/Saint /St /q' )
 
 		# This bit depricated; its for drawing word-search version of name, one char at a time.
 #	waymark=$( echo ${wayname:0:1} | tr '[:upper:]' '[:lower:]')
