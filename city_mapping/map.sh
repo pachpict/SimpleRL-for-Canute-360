@@ -62,40 +62,48 @@ function line {
 
 	
 		# A lot of the following is hang-over from word-search and should be cut
-		if ( grep -Fq "${newline},${newcell},${highwayname}" /dev/shm/highway-locations.csv )
+		if ( grep -Fq "${newline},${newcell},${wayname}" /dev/shm/way-locations.csv )
 		then
-			# This highway is already drawn here.
+			# This way is already drawn here.
 			let nonsense=True
 		else
-			if ( grep -Fq "${newline},${newcell}" /dev/shm/highway-locations.csv )
+			if ( grep -Fq "${newline},${newcell}" /dev/shm/way-locations.csv )
 			then
-				# Another highway is already drawn here so back-paint the previous cell as an intersection.
-				if (( ${oldline} != -1 && ${oldcell} != -1 ))
-				then
-					sed -i "${oldline}s/${z}/ /${oldcell}" /dev/shm/map.brf
-					sed -i "${oldline}s/${z}/ /$((oldcell+1))" /dev/shm/map.brf
-				fi
+				# Another way is already drawn here so back-paint the previous cell as an intersection.
+				let nonsense=True
+
+					# This depricated now intersections are not marked seperately.
+#				if (( ${oldline} != -1 && ${oldcell} != -1 ))
+#				then
+#					sed -i "${oldline}s/${z}/${waymark}/${oldcell}" /dev/shm/map.brf
+#					sed -i "${oldline}s/${z}/${waymark}/$((oldcell+1))" /dev/shm/map.brf
+#				fi
+
 			else
 				# Drawing on this cell for the first time
 				if (( ${oldline} == -1 && ${oldcell} == -1 ))
 				then
-					# This must be start of the highway.
-					sed -i "${newline}s/./ /${newcell}" /dev/shm/map.brf
-					sed -i "${newline}s/./ /$((newcell+1))" /dev/shm/map.brf
-					echo "${newline}","${newcell}","${highwayname}" >> /dev/shm/highway-locations.csv
-					echo "${newline}","$((newcell+1))","${highwayname}" >> /dev/shm/highway-locations.csv
+					# This must be start of the way.
+					# Replica of behaviour below. Remove if-check once sure do not want to draw start of road differently.
+					sed -i "${newline}s/./${waymark}/${newcell}" /dev/shm/map.brf
+					sed -i "${newline}s/./${waymark}/$((newcell+1))" /dev/shm/map.brf
+					echo "${newline}","${newcell}","${wayname}" >> /dev/shm/way-locations.csv
+					echo "${newline}","$((newcell+1))","${wayname}" >> /dev/shm/way-locations.csv
 				else
-					# Otherwise paint whitespace.
-					z=$( echo ${highwaymarks:${hwmi}:1} )
-					hwmi=$((hwmi+1))
-					if (( ${hwmi} == ${hwml} ))
-					then
-						hwmi=0
-					fi
-					sed -i "${newline}s/./ /${newcell}" /dev/shm/map.brf
-					sed -i "${newline}s/./ /$((newcell+1))" /dev/shm/map.brf
-					echo "${newline},${newcell},${highwayname}" >> /dev/shm/highway-locations.csv
-					echo "${newline}","$((newcell+1))","${highwayname}" >> /dev/shm/highway-locations.csv
+					# Otherwise paint way marker.
+					
+						# This bit depricated; its for drawing word-search version of name, one char at a time.
+#					z=$( echo ${waymarks:${wmi}:1} )
+#					wmi=$((wmi+1))
+#					if (( ${wmi} == ${wml} ))
+#					then
+#						wmi=0
+#					fi
+
+					sed -i "${newline}s/./${waymark}/${newcell}" /dev/shm/map.brf
+					sed -i "${newline}s/./${waymark}/$((newcell+1))" /dev/shm/map.brf
+					echo "${newline},${newcell},${wayname}" >> /dev/shm/way-locations.csv
+					echo "${newline}","$((newcell+1))","${wayname}" >> /dev/shm/way-locations.csv
 				fi
 				oldline=${newline}
 				oldcell=${newcell}
@@ -119,7 +127,7 @@ function line {
 
 # Creating the blank map.
 # Two cell margin needed for cut-off..?
-rm map.brf highway-locations.csv /dev/shm/highway-locations.csv /dev/shm/map.brf
+rm map.brf way-locations.csv /dev/shm/way-locations.csv /dev/shm/map.brf
 mapcells=400
 maplines=120
 filelines=0
@@ -128,7 +136,7 @@ while [ ${filelines} -lt ${maplines} ]; do
 	printf "%-${mapcells}s\n" "=" | sed 's/ /=/g' >> /dev/shm/map.brf
 	let filelines=filelines+1
 done
-touch /dev/shm/highway-locations.csv
+touch /dev/shm/way-locations.csv
 
 # Set map scale.
 # Have a Mercator projection problem here, different 
@@ -148,37 +156,40 @@ wb=-2.6039797
 # Create wider catchment for nodes for those that go off edge of display.
 # Comment out whenever poss when testing due to OSM server limitations.
 #curl -g "https://overpass-api.de/api/interpreter?data=[out:json];way['building']['name']($sb,$wb,$nb,$eb);out%20geom;" > buildings.json
-curl -g "https://overpass-api.de/api/interpreter?data=[out:json];way[highway~'^(motorway|trunk|primary|secondary|tertiary|unclassified|(motorway|trunk|primary|secondary)_link)$']['name']($sb,$wb,$nb,$eb);out%20geom;" > highways.json
+#curl -g "https://overpass-api.de/api/interpreter?data=[out:json];way[highway~'^(motorway|trunk|primary|secondary|tertiary|unclassified|(motorway|trunk|primary|secondary)_link)$']['name']($sb,$wb,$nb,$eb);out%20geom;" > highways.json
 #curl -g "https://overpass-api.de/api/interpreter?data=[out:json];way['highway']['name']($sb,$wb,$nb,$eb);out%20geom;" > highways.json
 
 # Loop through the highways
-rm highway-locations.csv
+rm way-locations.csv
 j=0
-numhighways=$( jq '.elements | length' highways.json )
-if (( $numhighways > 9999 )); then
-	let numhighways=9999
+numways=$( jq '.elements | length' highways.json )
+if (( $numways > 9999 )); then
+	let numways=9999
 fi
 
-while [ $j -lt $numhighways ]; do
+while [ $j -lt $numways ]; do
 
-	highway=$( jq ".elements[${j}]" highways.json)
+	way=$( jq ".elements[${j}]" highways.json)
+	wayname=$( echo ${way} | jq ".tags.name" | sed 's/"//g')
 
-	highwayname=$( echo ${highway} | jq ".tags.name" | sed 's/"//g')
-	highwaymark=$( echo ${highwayname:0:1} | tr '[:upper:]' '[:lower:]')
-	highwaymarks=$( echo "${highwayname} " | tr '[:upper:]' '[:lower:]' | sed 's/ street/ st/g'| sed 's/ lane/ ln/g' | sed 's/ avenue/ av/g' | sed 's/ road/ rd/g' | sed 's/ square/ sq/g' | sed 's/ /_/g')
-	hwml=$( echo ${#highwaymarks} )
-	hwmi=0
+		# This bit depricated; its for drawing word-search version of name, one char at a time.
+#	waymark=$( echo ${wayname:0:1} | tr '[:upper:]' '[:lower:]')
+#	waymarks=$( echo "${wayname} " | tr '[:upper:]' '[:lower:]' | sed 's/ street/ st/g'| sed 's/ lane/ ln/g' | sed 's/ avenue/ av/g' | sed 's/ road/ rd/g' | sed 's/ square/ sq/g' | sed 's/ /_/g')
+#	wml=$( echo ${#waymarks} )
+#	wmi=0
+
+	waymark=' '
 	let oldline=-1
 	let oldcell=-1
 
-	echo "${j}/${numhighways}" ${highwayname}
+	echo "${j}/${numways}" ${wayname}
 
-	numgeoms=$( echo ${highway} | jq ".geometry | length" )
+	numgeoms=$( echo ${way} | jq ".geometry | length" )
 	k=0
 	while [ $k -lt $numgeoms ]; do
 
-		geomlat=$( echo ${highway} | jq ".geometry[${k}] | .lat" )
-		geomlon=$( echo ${highway} | jq ".geometry[${k}] | .lon" )
+		geomlat=$( echo ${way} | jq ".geometry[${k}] | .lat" )
+		geomlon=$( echo ${way} | jq ".geometry[${k}] | .lon" )
 
 		# This is lazy stuff. It will probably fold any
 		# map that falls on the equator or meridian over
@@ -225,8 +236,8 @@ while [ $j -lt $numhighways ]; do
 done
 
 cp /dev/shm/map.brf ./map.brf
-cp /dev/shm/highway-locations.csv ./highway-locations.csv
-rm /dev/shm/highway-locations.csv /dev/shm/map.brf
+cp /dev/shm/way-locations.csv ./way-locations.csv
+rm /dev/shm/way-locations.csv /dev/shm/map.brf
 
 echo ${date} >> archive/maps.brf
 cat map.brf >> archive/maps.brf
