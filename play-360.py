@@ -11,6 +11,7 @@ map_file = open(map_dir+"map.brf", "r")
 locs_file = open(map_dir+'highway-locations.csv', "r")
 character = 'i'
 wall = '='
+indoors = '-'
 MAP = map_file.readlines()
 
 KEY_QUIT = ord('q')

@@ -14,7 +14,6 @@ function line {
 	y0=$2
 	x1=$3
 	y1=$4
-#	z=$5
 
 	if (( x0 > x1 ))
 	then
@@ -59,9 +58,14 @@ function line {
 		if (( newcell > $mapcells )); then
 			let newcell=$mapcells
 		fi
-
 	
 		# A lot of the following is hang-over from word-search and should be cut
+		# Now we have $wall we can probably scrap almost all of it and go with
+		# sed -i "${newline}s/${wall}/etc/etc
+		# This would mean checking that the play-360.py is only reading from the 
+		# first matching line in the CSV file. 
+		# Doing so should speed this up immensely.
+
 		if ( grep -Fq "${newline},${newcell},${wayname}" /dev/shm/way-locations.csv )
 		then
 			# This way is already drawn here.
@@ -69,41 +73,21 @@ function line {
 		else
 			if ( grep -Fq "${newline},${newcell}" /dev/shm/way-locations.csv )
 			then
-				# Another way is already drawn here so back-paint the previous cell as an intersection.
+				# Another way is already drawn here. We may want to mark it as a multi-way location, 
+				# if there is an application for that.
 				let nonsense=True
-
-					# This depricated now intersections are not marked seperately.
-#				if (( ${oldline} != -1 && ${oldcell} != -1 ))
-#				then
-#					sed -i "${oldline}s/${z}/${waymark}/${oldcell}" /dev/shm/map.brf
-#					sed -i "${oldline}s/${z}/${waymark}/$((oldcell+1))" /dev/shm/map.brf
-#				fi
-
 			else
-				# Drawing on this cell for the first time
-				if (( ${oldline} == -1 && ${oldcell} == -1 ))
-				then
-					# This must be start of the way.
-					# Replica of behaviour below. Remove if-check once sure do not want to draw start of road differently.
-					sed -i "${newline}s/./${waymark}/${newcell}" /dev/shm/map.brf
+				# Drawing on this cell for the first time.
+				sed -i "${newline}s/./${waymark}/${newcell}" /dev/shm/map.brf
+				echo "${newline},${newcell},${wayname}","${waytype}" >> /dev/shm/way-locations.csv
+				# Double up the line thickness
+				if ( grep -Fq "${newline},$((newcell+1))" /dev/shm/way-locations.csv )
+					then
+						# A way is already drawn here.
+						let nonsense=True
+					else
 					sed -i "${newline}s/./${waymark}/$((newcell+1))" /dev/shm/map.brf
-					echo "${newline}","${newcell}","${wayname}" >> /dev/shm/way-locations.csv
-					echo "${newline}","$((newcell+1))","${wayname}" >> /dev/shm/way-locations.csv
-				else
-					# Otherwise paint way marker.
-					
-						# This bit depricated; its for drawing word-search version of name, one char at a time.
-#					z=$( echo ${waymarks:${wmi}:1} )
-#					wmi=$((wmi+1))
-#					if (( ${wmi} == ${wml} ))
-#					then
-#						wmi=0
-#					fi
-
-					sed -i "${newline}s/./${waymark}/${newcell}" /dev/shm/map.brf
-					sed -i "${newline}s/./${waymark}/$((newcell+1))" /dev/shm/map.brf
-					echo "${newline},${newcell},${wayname}" >> /dev/shm/way-locations.csv
-					echo "${newline}","$((newcell+1))","${wayname}" >> /dev/shm/way-locations.csv
+					echo "${newline}","$((newcell+1))","${wayname}","${waytype}" >> /dev/shm/way-locations.csv
 				fi
 				oldline=${newline}
 				oldcell=${newcell}
@@ -125,8 +109,83 @@ function line {
 	done
 }
 
+function findways {
+
+	wayfile=${1}
+	loops=${2}
+	waymark=${3}
+	waytype=${4}
+
+	echo "Finding ways in "+${wayfile}
+
+	j=0
+	numways=$( jq '.elements | length' ${wayfile} )
+	if (( $numways > ${loops} )); then
+		let numways=${loops}
+	fi
+
+	while [ $j -lt $numways ]; do
+
+		way=$( jq ".elements[${j}]" ${wayfile})
+		wayname=$( echo ${way} | jq ".tags.name" | sed 's/"//g' | sed 's/ Street/ St/g'| sed 's/ Lane/ Ln/g' | sed 's/ Avenue/ Av/g' | sed 's/ Road/ Rd/g' | sed 's/ Square/ Sq/g' | sed 's/Saint /St /g' )
+		let oldline=-1
+		let oldcell=-1
+
+		echo "${j}/${numways}" ${wayname}
+
+		numgeoms=$( echo ${way} | jq ".geometry | length" )
+		k=0
+		while [ $k -lt $numgeoms ]; do
+
+			geomlat=$( echo ${way} | jq ".geometry[${k}] | .lat" )
+			geomlon=$( echo ${way} | jq ".geometry[${k}] | .lon" )
+
+			# This is lazy stuff. It will probably fold any
+			# map that falls on the equator or meridian over
+			# on itself.
+			if (( $( round $geomlat 0 ) > 0 )); then # North of the equator
+				curline=$( round $( echo "( ${nb} - ${geomlat} ) * ${scaley}" | bc ) 0 )
+			else # South of the equator
+				curline=$( round $( echo "( ${geomlat} - ${sb} ) * ${scalex}" | bc ) 0 )
+			fi
+			if (( $( round $geomlon 0 ) > 0 )); then # East of Greenwich Meridian.
+				curcell=$( round $( echo "( ${eb} - ${geomlon} ) * ${scaley}" | bc ) 0 )
+			else # West of Greenwich Meridian.
+				curcell=$( round $( echo "( ${geomlon} - ${wb} ) * ${scalex}" | bc ) 0 )
+			fi
+
+			# So, idea is, give a one-cell margin around the
+			# edge so lines can be plotted to these edge
+			# geoms. Then cut the edge cells off. Is hacky.
+			if (( $curline < 1 )); then
+				let curline=1
+			fi
+			if (( $curline > $maplines )); then
+				let curline=$maplines
+			fi
+			if (( $curcell < 1 )); then
+				let curcell=1
+			fi
+			if (( $curcell > $mapcells )); then
+				let curcell=$mapcells
+			fi
+
+			# Draw a line between geoms.
+			if (( $k > 0 )); then
+				line $prevcell $prevline $curcell $curline 
+			fi
+			# Save the old values so we can plot a line
+			prevline=$curline
+			prevcell=$curcell
+
+			let k=k+1
+		done
+
+		let j=j+1
+	done
+}
+
 # Creating the blank map.
-# Two cell margin needed for cut-off..?
 rm map.brf way-locations.csv /dev/shm/way-locations.csv /dev/shm/map.brf
 mapcells=400
 maplines=120
@@ -152,170 +211,35 @@ eb=-2.5821023
 sb=51.4484943
 wb=-2.6039797
 
+
+rm way-locations.csv
+
 # Download all the named highways and or buildings for that region from Open Street Map.
 # Comment out whenever poss when testing due to OSM server limitations.
+
+# Call for drivable highways
+#curl -g "https://overpass-api.de/api/interpreter?data=[out:json];way[highway~'^(motorway|trunk|primary|secondary|tertiary|unclassified|(motorway|trunk|primary|secondary)_link)$']['name']($sb,$wb,$nb,$eb);out%20geom;" > major-highways.json
+
+findways "major-highways.json" 9999 ' ' 'road'
+
+# Call for other highways
+#curl -g "https://overpass-api.de/api/interpreter?data=[out:json];way[highway][highway!~'^(motorway|trunk|primary|secondary|tertiary|unclassified|(motorway|trunk|primary|secondary)_link)$']['name']($sb,$wb,$nb,$eb);out%20geom;" > minor-highways.json
+
+findways "minor-highways.json" 9999 "'" 'path'
 
 # Call for all buildings
 #curl -g "https://overpass-api.de/api/interpreter?data=[out:json];way['building']['name']($sb,$wb,$nb,$eb);out%20geom;" > buildings.json
 
-# Call for drivable highways
-#curl -g "https://overpass-api.de/api/interpreter?data=[out:json];way[highway~'^(motorway|trunk|primary|secondary|tertiary|unclassified|(motorway|trunk|primary|secondary)_link)$']['name']($sb,$wb,$nb,$eb);out%20geom;" > highways.json
+findways "buildings.json" 9999 '7' 'building'
 
-# This call is for all highways, including steps, pedetrian ones, et cetera:
-#curl -g "https://overpass-api.de/api/interpreter?data=[out:json];way['highway']['name']($sb,$wb,$nb,$eb);out%20geom;" > highways.json
 
-rm way-locations.csv
-
-# Loop through the buildings
-# This and highways should be one function, but this is just a quick and dirty test.
-j=0
-numways=$( jq '.elements | length' buildings.json )
-if (( $numways > 9999 )); then
-	let numways=9999
-fi
-
-while [ $j -lt $numways ]; do
-
-	way=$( jq ".elements[${j}]" buildings.json)
-	wayname=$( echo ${way} | jq ".tags.name" | sed 's/"//g' | sed 's/ Street/ St/g'| sed 's/ Lane/ Ln/g' | sed 's/ Avenue/ Av/g' | sed 's/ Road/ Rd/g' | sed 's/ Square/ Sq/g' | sed 's/Saint /St /g' )
-
-	waymark='-'
-	let oldline=-1
-	let oldcell=-1
-
-	echo "${j}/${numways}" ${wayname}
-
-	numgeoms=$( echo ${way} | jq ".geometry | length" )
-	k=0
-	while [ $k -lt $numgeoms ]; do
-
-		geomlat=$( echo ${way} | jq ".geometry[${k}] | .lat" )
-		geomlon=$( echo ${way} | jq ".geometry[${k}] | .lon" )
-
-		# This is lazy stuff. It will probably fold any
-		# map that falls on the equator or meridian over
-		# on itself.
-		if (( $( round $geomlat 0 ) > 0 )); then # North of the equator
-			curline=$( round $( echo "( ${nb} - ${geomlat} ) * ${scaley}" | bc ) 0 )
-		else # South of the equator
-			curline=$( round $( echo "( ${geomlat} - ${sb} ) * ${scalex}" | bc ) 0 )
-		fi
-		if (( $( round $geomlon 0 ) > 0 )); then # East of Greenwich Meridian.
-			curcell=$( round $( echo "( ${eb} - ${geomlon} ) * ${scaley}" | bc ) 0 )
-		else # West of Greenwich Meridian.
-			curcell=$( round $( echo "( ${geomlon} - ${wb} ) * ${scalex}" | bc ) 0 )
-		fi
-
-		# So, idea is, give a one-cell margin around the
-		# edge so lines can be plotted to these edge
-		# geoms. Then cut the edge cells off. Is hacky.
-		if (( $curline < 1 )); then
-			let curline=1
-		fi
-		if (( $curline > $maplines )); then
-			let curline=$maplines
-		fi
-		if (( $curcell < 1 )); then
-			let curcell=1
-		fi
-		if (( $curcell > $mapcells )); then
-			let curcell=$mapcells
-		fi
-
-		# Draw a line between geoms.
-		if (( $k > 0 )); then
-			line $prevcell $prevline $curcell $curline 
-		fi
-		# Save the old values so we can plot a line
-		prevline=$curline
-		prevcell=$curcell
-
-		let k=k+1
-	done
-
-	let j=j+1
-done
- --------------
-
-# Loop through the highways
-# This and buildings should be one function, but this is just a quick and dirty test.
-j=0
-numways=$( jq '.elements | length' highways.json )
-if (( $numways > 9999 )); then
-	let numways=9999
-fi
-
-while [ $j -lt $numways ]; do
-
-	way=$( jq ".elements[${j}]" highways.json)
-	wayname=$( echo ${way} | jq ".tags.name" | sed 's/"//g' | sed 's/ Street/ St/g'| sed 's/ Lane/ Ln/g' | sed 's/ Avenue/ Av/g' | sed 's/ Road/ Rd/g' | sed 's/ Square/ Sq/g' | sed 's/Saint /St /q' )
-
-		# This bit depricated; its for drawing word-search version of name, one char at a time.
-#	waymark=$( echo ${wayname:0:1} | tr '[:upper:]' '[:lower:]')
-#	waymarks=$( echo "${wayname} " | tr '[:upper:]' '[:lower:]' | sed 's/ street/ st/g'| sed 's/ lane/ ln/g' | sed 's/ avenue/ av/g' | sed 's/ road/ rd/g' | sed 's/ square/ sq/g' | sed 's/ /_/g')
-#	wml=$( echo ${#waymarks} )
-#	wmi=0
-
-	waymark=' '
-	let oldline=-1
-	let oldcell=-1
-
-	echo "${j}/${numways}" ${wayname}
-
-	numgeoms=$( echo ${way} | jq ".geometry | length" )
-	k=0
-	while [ $k -lt $numgeoms ]; do
-
-		geomlat=$( echo ${way} | jq ".geometry[${k}] | .lat" )
-		geomlon=$( echo ${way} | jq ".geometry[${k}] | .lon" )
-
-		# This is lazy stuff. It will probably fold any
-		# map that falls on the equator or meridian over
-		# on itself.
-		if (( $( round $geomlat 0 ) > 0 )); then # North of the equator
-			curline=$( round $( echo "( ${nb} - ${geomlat} ) * ${scaley}" | bc ) 0 )
-		else # South of the equator
-			curline=$( round $( echo "( ${geomlat} - ${sb} ) * ${scalex}" | bc ) 0 )
-		fi
-		if (( $( round $geomlon 0 ) > 0 )); then # East of Greenwich Meridian.
-			curcell=$( round $( echo "( ${eb} - ${geomlon} ) * ${scaley}" | bc ) 0 )
-		else # West of Greenwich Meridian.
-			curcell=$( round $( echo "( ${geomlon} - ${wb} ) * ${scalex}" | bc ) 0 )
-		fi
-
-		# So, idea is, give a one-cell margin around the
-		# edge so lines can be plotted to these edge
-		# geoms. Then cut the edge cells off. Is hacky.
-		if (( $curline < 1 )); then
-			let curline=1
-		fi
-		if (( $curline > $maplines )); then
-			let curline=$maplines
-		fi
-		if (( $curcell < 1 )); then
-			let curcell=1
-		fi
-		if (( $curcell > $mapcells )); then
-			let curcell=$mapcells
-		fi
-
-		# Draw a line between geoms.
-		if (( $k > 0 )); then
-			line $prevcell $prevline $curcell $curline 
-		fi
-		# Save the old values so we can plot a line
-		prevline=$curline
-		prevcell=$curcell
-
-		let k=k+1
-	done
-
-	let j=j+1
-done
+# Call is for all highways, including steps, pedestrian ones, et cetera:
+#curl -g "https://overpass-api.de/api/interpreter?data=[out:json];way['highway']['name']($sb,$wb,$nb,$eb);out%20geom;" > all-highways.json
 
 cp /dev/shm/map.brf ./map.brf
 cp /dev/shm/way-locations.csv ./way-locations.csv
 rm /dev/shm/way-locations.csv /dev/shm/map.brf
+# Still need to sort out cutting off or blocking the edges of the map.
 
 echo ${date} >> archive/maps.brf
 cat map.brf >> archive/maps.brf
