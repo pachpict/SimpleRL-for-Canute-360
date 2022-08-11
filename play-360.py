@@ -45,7 +45,7 @@ class Game(object):
 	def break_movement(self):
 		self.momentum[0] = 0
 		self.momentum[1] = 0
-		self.transport = 'parked'
+		self.transport = 'standing'
 
 	def replay_story(self):
 		self.break_movement()
@@ -125,9 +125,9 @@ class Game(object):
 			else: blocked = True
 
 		if blocked == True: 
-			self.transport = 'parked'
+			self.transport = 'standing'
 			raise BlockedMovement()
-		else: self.transport = 'driving'
+		else: self.transport = 'walking'
 
 		for highway_row in self.ways:
 			if (int(highway_row[1])-1 == int(self.map_pos[0]+self.x) and
@@ -140,7 +140,7 @@ class Game(object):
 				if (int(story_row[1])-1 == int(self.map_pos[0]+self.x) and
 					int(story_row[2])-1 == int(self.map_pos[1]+self.y)):
 					self.break_movement()
-					self.add_message('You are '+self.transport+' on '+self.location)
+					self.add_message('You are '+self.transport+' '+self.in_on+' '+self.location)
 					self.prev_story = story_row[3]
 					self.story(self.prev_story)
 
@@ -148,7 +148,7 @@ class Game(object):
 		for row in range(8):
 			self.screen.addstr(row, 0, MAP[self.map_pos[1] + row][self.map_pos[0]:self.map_pos[0]+40])
 			# When clear() is uncommented in `def story` it exposes a bug  where only the self.transport part is added to the screen.
-			self.add_message('You are '+self.transport+' on '+self.location)
+			self.add_message('You are '+self.transport+' '+self.in_on+' '+self.location)
 
 	def story(self, story_page):
 		# To do: Mark story page as read
@@ -172,7 +172,8 @@ class Game(object):
 		self.x, self.y = int(map_start_csv[0][0]), int(map_start_csv[0][1])
 		with locs_file as highway_locations_file:
 			self.ways = list(csv.reader(highway_locations_file))
-		self.transport = 'parked'
+		self.transport = 'standing'
+		self.in_on = 'on'
 		self.momentum = [0,0]
 		with open(map_dir+'story.csv', mode='r') as story_file:
 			self.story_csv = list(csv.reader(story_file))
@@ -193,7 +194,6 @@ class Game(object):
 				self.momentum[0] = self.direction[0]
 				self.momentum[1] = self.direction[1]
 			if key == KEY_BREAK: self.replay_story()
-#			self.screen.addstr(self.y, self.x, ' ')
 			if self.momentum[0] != 0 or self.momentum[1] != 0:
 				map_change = False
 				try:

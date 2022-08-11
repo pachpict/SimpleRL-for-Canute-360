@@ -1,10 +1,10 @@
-Incoming call: "Welcome to Bristol. 
-We've left you a car by The Nails, 
-just 'til you've found your own
-wheels. When you're ready come find 
-me on the far side of Bristol Bridge. 
-Got a couple jobs for you. Go East 
-to Broad St, down High St, then South
-to cross over Bridge." [Click]
+Driver: "Welcome to Bristol. I'm 
+dropping you off at the top of Broad 
+St. When you're ready go meet your 
+connexion, Terry. He's on the far 
+side of Bristol Bridge. He's got a 
+couple jobs for you. Go East to 
+Broad St, down High St, then South 
+to cross over Bristol Bridge." 
 
 
