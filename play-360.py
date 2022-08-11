@@ -179,7 +179,7 @@ class Game(object):
 		self.transport = 'standing'
 		self.on_in = 'on'
 		self.momentum = [0,0]
-		with open(map_dir+'story.csv', mode='r') as story_file:
+		with open(map_dir+'story/story.csv', mode='r') as story_file:
 			self.story_csv = list(csv.reader(story_file))
 		self.prev_story = self.story_csv[0][3]
 		self.story(self.prev_story)

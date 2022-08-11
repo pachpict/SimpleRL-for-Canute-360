@@ -219,25 +219,24 @@ rm way-locations.csv
 # Comment out whenever poss when testing due to OSM server limitations.
 
 # Call for drivable highways
-#curl -g "https://overpass-api.de/api/interpreter?data=[out:json];way[highway~'^(motorway|trunk|primary|secondary|tertiary|unclassified|(motorway|trunk|primary|secondary)_link)$']['name']($sb,$wb,$nb,$eb);out%20geom;" > major-highways.json
+#curl -g "https://overpass-api.de/api/interpreter?data=[out:json];way[highway~'^(motorway|trunk|primary|secondary|tertiary|unclassified|(motorway|trunk|primary|secondary)_link)$']['name']($sb,$wb,$nb,$eb);out%20geom;" > way-sources/major-highways.json
 
-findways "major-highways.json" 9999 ' ' 'road'
+findways "way-sources/major-highways.json" 9999 ' ' 'road'
 
 # Call for other highways
-#curl -g "https://overpass-api.de/api/interpreter?data=[out:json];way[highway][highway!~'^(motorway|trunk|primary|secondary|tertiary|unclassified|(motorway|trunk|primary|secondary)_link)$']['name']($sb,$wb,$nb,$eb);out%20geom;" > minor-highways.json
+#curl -g "https://overpass-api.de/api/interpreter?data=[out:json];way[highway][highway!~'^(motorway|trunk|primary|secondary|tertiary|unclassified|(motorway|trunk|primary|secondary)_link)$']['name']($sb,$wb,$nb,$eb);out%20geom;" > way-sources/minor-highways.json
 
-findways "minor-highways.json" 9999 " " 'path'
+findways "way-sources/minor-highways.json" 9999 " " 'path'
 
 # Call for all buildings
-#curl -g "https://overpass-api.de/api/interpreter?data=[out:json];way['building']['name']($sb,$wb,$nb,$eb);out%20geom;" > buildings.json
+#curl -g "https://overpass-api.de/api/interpreter?data=[out:json];way['building']['name']($sb,$wb,$nb,$eb);out%20geom;" > way-sources/buildings.json
 # Untested call with less buildings returned
-#curl -g "https://overpass-api.de/api/interpreter?data=[out:json];way['building'][building!~'^(office)$][amenity!~'^(parking)$]['name']($sb,$wb,$nb,$eb);out%20geom;" > buildings.json
+#curl -g "https://overpass-api.de/api/interpreter?data=[out:json];way['building'][building!~'^(office)$][amenity!~'^(parking)$]['name']($sb,$wb,$nb,$eb);out%20geom;" > way-sources/buildings.json
 
-findways "buildings.json" 9999 '7' 'building'
-
+findways "way-sources/buildings.json" 9999 '7' 'building'
 
 # Call is for all highways, including steps, pedestrian ones, et cetera:
-#curl -g "https://overpass-api.de/api/interpreter?data=[out:json];way['highway']['name']($sb,$wb,$nb,$eb);out%20geom;" > all-highways.json
+#curl -g "https://overpass-api.de/api/interpreter?data=[out:json];way['highway']['name']($sb,$wb,$nb,$eb);out%20geom;" > way-sources/all-highways.json
 
 cp /dev/shm/map.brf ./map.brf
 cp /dev/shm/way-locations.csv ./way-locations.csv
