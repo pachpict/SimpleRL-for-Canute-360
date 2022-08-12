@@ -1,10 +1,10 @@
 Driver: "Welcome to Bristol. I'm 
 dropping you off at the top of Broad 
 St. When you're ready go meet your 
-connexion, Terry. He's on the far 
-side of Bristol Bridge. He's got a 
-couple jobs for you. Go East to 
+connexion, Terry, on Bristol Bridge. 
+He's got a job for you. Go East to 
 Broad St, down High St, then South 
-to cross over Bristol Bridge." 
+to cross over the Bridge."
+Go to 225,71: Bristol Bridge.
 
 

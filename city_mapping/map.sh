@@ -90,11 +90,6 @@ function line {
 				fi
 			fi
 		fi
-		# ... Like so? Breaks things.
-#		sed -i "${newline}s/${wall}/${waymark}/${newcell}" /dev/shm/map.brf
-#		echo "${newline},${newcell},${wayname}","${waytype}" >> /dev/shm/way-locations.csv
-#		sed -i "${newline}s/${wall}/${waymark}/$((newcell+1))" /dev/shm/map.brf
-#		echo "${newline}","$((newcell+1))","${wayname}","${waytype}" >> /dev/shm/way-locations.csv
 
 		(( x0 == x1 && y0 == y1 )) && return
 		(( e2 = err ))

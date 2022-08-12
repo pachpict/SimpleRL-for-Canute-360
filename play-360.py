@@ -154,7 +154,7 @@ class Game(object):
 		self.add_message(posi[0]+','+posi[1]+': You are '+self.on_in+' '+self.location)
 
 	def draw_map(self):
-		for row in range(8):
+		for row in range(7):
 			self.screen.addstr(row, 0, MAP[self.map_pos[1] + row][self.map_pos[0]:self.map_pos[0]+40])
 			self.describe_location()
 
@@ -209,25 +209,25 @@ class Game(object):
 				except BlockedMovement: self.break_movement()
 				pass
 				if self.x < 2 and self.momentum[0] < 0:
-					self.map_pos[0] = self.map_pos[0]-19
+					self.map_pos[0] = self.map_pos[0]-38
 					if self.map_pos[0] < 0: self.map_pos[0] = 0
 					else:
 						map_change = True
-						self.move_player(+19, 0, map_change)
+						self.move_player(+38, 0, map_change)
 				elif self.x > 38 and self.momentum[0] > 0:
-					self.map_pos[0] = self.map_pos[0]+19
+					self.map_pos[0] = self.map_pos[0]+38
 					map_change = True
-					self.move_player(-19,0, map_change)
+					self.move_player(-38,0, map_change)
 				if self.y < 2 and self.momentum[1] < 0:
-					self.map_pos[1] = self.map_pos[1]-6
+					self.map_pos[1] = self.map_pos[1]-5
 					if self.map_pos[1] < 0: self.map_pos[1] = 0
 					else:
 						map_change = True
-						self.move_player(0, +6, map_change)
-				elif self.y > 6 and self.momentum[1] > 0:
-					self.map_pos[1] = self.map_pos[1]+6
+						self.move_player(0, +5, map_change)
+				elif self.y > 5 and self.momentum[1] > 0:
+					self.map_pos[1] = self.map_pos[1]+5
 					map_change = True
-					self.move_player(0, -6, map_change)
+					self.move_player(0, -5, map_change)
 			self.draw_map()
 			self.screen.addstr(self.y, self.x, character)
 			# Hack to move cursor out the way

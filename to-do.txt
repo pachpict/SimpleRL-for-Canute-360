@@ -20,6 +20,10 @@
  - Allow true one-move diagnonal movement (https://pypi.org/project/keyboard/, https://stackoverflow.com/questions/52910090/how-to-check-for-multiple-key-presses-in-python-keyboard-module, https://github.com/boppreh/keyboard#api).
  - Fill in ways for buildings? Currently they are outlines. Requires new line drawing function. They ought to be filled in if you are showing top down view of how one moves around a city, but then again getting the shape is quite nice and maybe better for appreciating form.
  - Add fuzzy logic "Go to way" search, which wangs the player to the closest match for the string they enter. (https://typesense.org/learn/fuzzy-string-matching-python/)
+ - Is discombobulating to move around the map, made worse by horizontal centring but vertical not. Change and make less discombolulating. This is hiding a much bigger question of how one moves around maps like this...
+ 	- Centre in both dimensions when redrawing map, as a starter. Warning: Will make much slower to move around on a Canute, but has to be tried.
+ 	- Or revert back to appearing at the other side of the map.
+ 		- Both require testing before adoption.
 
  --------------------------------------------------------------
 
@@ -37,6 +41,7 @@
  x Remove the reference to 'driving' as the interaction is no longer like driving, and are proposing going into buildings.
  x Now are travelling by foot add pedestrian ways back in.
  x Display co-ordinates so user can alt tab to the story csv and dir to add new story point.
+ x Add extra instruction line with next destination, including the co-ordinates.
 
 # Cancelled:
 
