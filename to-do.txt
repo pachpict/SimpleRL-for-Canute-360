@@ -42,11 +42,11 @@
  x Now are travelling by foot add pedestrian ways back in.
  x Display co-ordinates so user can alt tab to the story csv and dir to add new story point.
  x Add extra instruction line with next destination, including the co-ordinates.
+ x Paint trunk/main roads *before* normal roads so they get priority
 
 # Cancelled:
 
  - Make momentum optional and default to no momentum (presents difficulties with diagonal movement).
- - Paint trunk/main roads *after* normal roads so they get priority
  - Render maps at smaller scale, i.e. panned out. First try fitting about 150% on screen (tried it and it made it worse).
  - As suggested by Paul, actually label the roads in the traditional fashion, somehow.
  - Paint underscore or similar non-alphanumberic symbol where roads intersect. Started...
