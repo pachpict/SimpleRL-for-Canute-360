@@ -209,6 +209,8 @@ class Game(object):
     for row in range(min(8, len(storylines))):
       self.screen.addstr(row, 0, storylines[row][0:39])
     self.screen.getch()
+    self.blank_map()
+    self.screen.getch()  
 
   def tuck_cursor(self):
     # Hack to move cursor out the way
