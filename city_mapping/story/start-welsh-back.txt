@@ -1,9 +1,9 @@
 Terry Tibb's associate: "Thanks. Now 
-go away, we haven't thought of 
-anything else. Maybe find Old Market. 
-Up High St. East to Wine St, Newgate 
-and Broad Weir. South to Lower Castle 
-St and Castle St. East to roundabout. 
-Or do something else, just piss off."
-Go to ?,?: Anywhere, see if I care.
+go wait in the Stag & Hounds, in Old 
+Market. We'll have a proper job for you 
+when you get there. Up High St. East to 
+Wine St, Newgate and Broad Weir. South 
+to Lower Castle St and Castle St. 
+East to roundabout, go straight over."
+Go to 51,367: Stag & Hounds, Old Market
 

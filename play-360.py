@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import curses, sys, os, csv
+import curses, sys, os, csv, time
 from os import system, name
 
 stdscr = curses.initscr()
@@ -153,10 +153,51 @@ class Game(object):
     posi=[str(self.map_pos[0] + self.x + 1),str(self.map_pos[1] + self.y + 1)]
     self.add_message(posi[0]+','+posi[1]+': You are '+self.on_in+' '+self.location)
 
+  def opening_blurb(self):
+    blurb = [
+      "Welcome to Cities Through Braille,    ",
+      "a short demo by Bristol Braille Tech. ",
+      "I am your character, the letter i.    ",
+      "Walk me around with keyboard arrows.  ",
+      "Spaces are streets, 7 are a buildings.",
+      "When i get to an edge the map will    ",
+      "turn a page up, down, left or right,  ",
+      "and i will have moved too.            ",
+      "Press any key to continue.            "
+    ]
+    for row in range(9):
+      self.screen.addstr(row, 0, blurb[row])
+    self.tuck_cursor()
+    self.screen.getch()
+    blurb = [      
+      "The bottom lines tell us where to go  ",
+      "and where we are now, using horizontal",
+      "and vertical co-ordinates.            ",
+      "To play just to explore the city.     ",
+      "There are story missions too.         ",
+      "To read the current mission again     ",
+      "press space at any time. This is very ",
+      "experimental so all feedback welcome! ",
+      "Press any key to continue.            "
+    ]
+    for row in range(9):
+      self.screen.addstr(row, 0, blurb[row])
+    self.tuck_cursor()
+    self.screen.getch()
+
+  def blank_map(self):
+    for row in range(7):
+      self.screen.addstr(row, 0, "                                        ")
+    self.describe_location()
+    self.screen.addstr(self.y, self.x, character)
+    self.tuck_cursor()
+
   def draw_map(self):
     for row in range(7):
       self.screen.addstr(row, 0, MAP[self.map_pos[1] + row][self.map_pos[0]:self.map_pos[0]+40])
-      self.describe_location()
+    self.describe_location()
+    self.screen.addstr(self.y, self.x, character)
+    self.tuck_cursor()
 
   def story(self, story_page):
     # To do: Mark story page as read
@@ -169,7 +210,15 @@ class Game(object):
       self.screen.addstr(row, 0, storylines[row][0:39])
     self.screen.getch()
 
+  def tuck_cursor(self):
+    # Hack to move cursor out the way
+    self.screen.addstr(8, 39, '')
+
   def main(self):
+    self.opening_blurb()
+    self.gameplay_loop()
+
+  def gameplay_loop(self):
     with open(map_dir+'map-start.csv', mode='r') as map_start_file:
       map_start_csv = list(csv.reader(map_start_file))
     self.map_pos = [
@@ -191,9 +240,6 @@ class Game(object):
     map_change = False
     key = None
     self.draw_map()
-    self.screen.addstr(self.y, self.x, character)
-    # Hack to move cursor out the way
-    self.screen.addstr(8, 39, '')
     while key != KEY_QUIT:
       key = self.screen.getch()
       try: self.direction = DIRECTIONS[key]
@@ -208,28 +254,30 @@ class Game(object):
           self.move_player(self.momentum[0], self.momentum[1], map_change)
         except BlockedMovement: self.break_movement()
         pass
-        if self.x < 2 and self.momentum[0] < 0:
-          self.map_pos[0] = self.map_pos[0]-38
+        if self.x < 1 and self.momentum[0] < 0:
+          self.map_pos[0] = self.map_pos[0]-39
           if self.map_pos[0] < 0: self.map_pos[0] = 0
           else:
             map_change = True
-            self.move_player(+38, 0, map_change)
-        elif self.x > 38 and self.momentum[0] > 0:
-          self.map_pos[0] = self.map_pos[0]+38
+            self.move_player(+39, 0, map_change)
+        elif self.x > 39 and self.momentum[0] > 0:
+          self.map_pos[0] = self.map_pos[0]+39
           map_change = True
-          self.move_player(-38,0, map_change)
-        if self.y < 2 and self.momentum[1] < 0:
-          self.map_pos[1] = self.map_pos[1]-5
+          self.move_player(-39,0, map_change)
+        if self.y < 1 and self.momentum[1] < 0:
+          self.map_pos[1] = self.map_pos[1]-6
           if self.map_pos[1] < 0: self.map_pos[1] = 0
           else:
             map_change = True
-            self.move_player(0, +5, map_change)
-        elif self.y > 5 and self.momentum[1] > 0:
-          self.map_pos[1] = self.map_pos[1]+5
+            self.move_player(0, +6, map_change)
+        elif self.y > 6 and self.momentum[1] > 0:
+          self.map_pos[1] = self.map_pos[1]+6
           map_change = True
-          self.move_player(0, -5, map_change)
+          self.move_player(0, -6, map_change)
+      if map_change == True:
+        self.blank_map()
+        self.screen.getch()
       self.draw_map()
-      self.screen.addstr(self.y, self.x, character)
       # Hack to move cursor out the way
       self.screen.addstr(8, 39, '')
     self.screen.nodelay(False)
